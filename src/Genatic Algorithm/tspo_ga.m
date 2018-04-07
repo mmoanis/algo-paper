@@ -32,59 +32,6 @@
 %     - OPTROUTE (integer array) is the best route found by the algorithm
 %     - MINDIST (scalar float) is the cost of the best route
 %
-% Usage:
-%     tspo_ga
-%       -or-
-%     tspo_ga(userConfig)
-%       -or-
-%     resultStruct = tspo_ga;
-%       -or-
-%     resultStruct = tspo_ga(userConfig);
-%       -or-
-%     [...] = tspo_ga('Param1',Value1,'Param2',Value2, ...);
-%
-% Example:
-%     % Let the function create an example problem to solve
-%     tspo_ga;
-%
-% Example:
-%     % Request the output structure from the solver
-%     resultStruct = tspo_ga;
-%
-% Example:
-%     % Pass a random set of user-defined XY points to the solver
-%     userConfig = struct('xy',10*rand(50,2));
-%     resultStruct = tspo_ga(userConfig);
-%
-% Example:
-%     % Pass a more interesting set of XY points to the solver
-%     n = 50;
-%     phi = (sqrt(5)-1)/2;
-%     theta = 2*pi*phi*(0:n-1);
-%     rho = (1:n).^phi;
-%     [x,y] = pol2cart(theta(:),rho(:));
-%     xy = 10*([x y]-min([x;y]))/(max([x;y])-min([x;y]));
-%     userConfig = struct('xy',xy);
-%     resultStruct = tspo_ga(userConfig);
-%
-% Example:
-%     % Pass a random set of 3D (XYZ) points to the solver
-%     xyz = 10*rand(50,3);
-%     userConfig = struct('xy',xyz);
-%     resultStruct = tspo_ga(userConfig);
-%
-% Example:
-%     % Change the defaults for GA population size and number of iterations
-%     userConfig = struct('popSize',200,'numIter',1e4);
-%     resultStruct = tspo_ga(userConfig);
-%
-% Example:
-%     % Turn off the plots but show a waitbar
-%     userConfig = struct('showProg',false,'showResult',false,'showWaitbar',true);
-%     resultStruct = tspo_ga(userConfig);
-%
-% See also: tsp_ga, tsp_nn, tspof_ga, tspofs_ga, distmat
-%
 % Author: Joseph Kirk
 % Email: jdkirk630@gmail.com
 % Release: 2.0
@@ -92,11 +39,11 @@
 function varargout = tspo_ga(varargin)
     
     % Initialize default configuration
-    defaultConfig.xy          = 10*rand(50,2);
+    defaultConfig.xy          = get_dataset();
     defaultConfig.dmat        = [];
     defaultConfig.popSize     = 100;
     defaultConfig.numIter     = 1e4;
-    defaultConfig.showProg    = true;
+    defaultConfig.showProg    = false;
     defaultConfig.showResult  = true;
     defaultConfig.showWaitbar = false;
     
@@ -145,6 +92,9 @@ function varargout = tspo_ga(varargin)
     showResult  = logical(showResult(1));
     showWaitbar = logical(showWaitbar(1));
     
+    % (mmoanis): start recording time
+    tic
+    
     % Initialize the Population
     pop = zeros(popSize,n);
     pop(1,:) = (1:n);
@@ -158,13 +108,13 @@ function varargout = tspo_ga(varargin)
     distHistory = zeros(1,numIter);
     tmpPop = zeros(4,n);
     newPop = zeros(popSize,n);
-    if showProg
-        figure('Name','TSPO_GA | Current Best Solution','Numbertitle','off');
-        hAx = gca;
-    end
-    if showWaitbar
-        hWait = waitbar(0,'Searching for near-optimal solution ...');
-    end
+    %if showProg
+    %    figure('Name','TSPO_GA | Current Best Solution','Numbertitle','off');
+    %    hAx = gca;
+    %end
+    %if showWaitbar
+    %    hWait = waitbar(0,'Searching for near-optimal solution ...');
+    %end
     for iter = 1:numIter
         % Evaluate Each Population Member (Calculate Total Distance)
         for p = 1:popSize
@@ -181,13 +131,13 @@ function varargout = tspo_ga(varargin)
         if minDist < globalMin
             globalMin = minDist;
             optRoute = pop(index,:);
-            if showProg
-                % Plot the Best Route
-                if dims > 2, plot3(hAx,xy(optRoute,1),xy(optRoute,2),xy(optRoute,3),'r.-');
-                else plot(hAx,xy(optRoute,1),xy(optRoute,2),'r.-'); end
-                title(hAx,sprintf('Total Distance = %1.4f, Iteration = %d',minDist,iter));
-                drawnow;
-            end
+            %if showProg
+            %    % Plot the Best Route
+            %    if dims > 2, plot3(hAx,xy(optRoute,1),xy(optRoute,2),xy(optRoute,3),'r.-');
+            %    else plot(hAx,xy(optRoute,1),xy(optRoute,2),'r.-'); end
+            %    title(hAx,sprintf('Total Distance = %1.4f, Iteration = %d',minDist,iter));
+            %    drawnow;
+            %end
         end
         
         % Genetic Algorithm Operators
@@ -217,14 +167,18 @@ function varargout = tspo_ga(varargin)
         pop = newPop;
         
         % Update the waitbar
-        if showWaitbar && ~mod(iter,ceil(numIter/325))
-            waitbar(iter/numIter,hWait);
-        end
+        %if showWaitbar && ~mod(iter,ceil(numIter/325))
+        %    waitbar(iter/numIter,hWait);
+        %end
         
     end
-    if showWaitbar
-        close(hWait);
-    end
+    
+    % (mmoanis): end recording
+    toc
+    
+    %if showWaitbar
+    %    close(hWait);
+    %end
     
     if showResult
         % Plots the GA Results
@@ -248,7 +202,7 @@ function varargout = tspo_ga(varargin)
     end
     
     % Return Output
-    if nargout
+    %if nargout
         resultStruct = struct( ...
             'xy',          xy, ...
             'dmat',        dmat, ...
@@ -261,7 +215,7 @@ function varargout = tspo_ga(varargin)
             'minDist',     minDist);
         
         varargout = {resultStruct};
-    end
+    %end
     
 end
 
