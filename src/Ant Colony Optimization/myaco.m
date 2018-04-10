@@ -20,9 +20,10 @@
 % function myaco(num_of_nodes,num_of_ants, max_iteration)
 function myaco()
 % inputs
+cities = get_dataset();
 miter=10;
 m=10;
-n=10;
+n=size(cities, 1);
 % parameters
 e=.15;            % evaporation coefficient.
 alpha=1;          % effect of ants' sight.
@@ -32,14 +33,10 @@ el=.97;           % common cost elimination.
 % -------------------------------------------------------------------------
 % Generate coordinates of cities and plot
 for i=1:n
-    x(i)=rand*20;
-    y(i)=rand*20;
+    x(i)=cities(i, 1);
+    y(i)=cities(i, 2);
 end    
-subplot(3,1,1);
-plot(x,y,'o','MarkerFaceColor','k','MarkerEdgeColor','b','MarkerSize',10);
-title('Coordinates of Cities');
-xlabel('x  (km)');
-ylabel('y  (km)');
+tic
 
 % generating distace between cities matrix.
 for i=1:n
@@ -58,7 +55,7 @@ for i=1:n
         end
     end
 end
-h=h
+h=h;
 % ------------------------------------------------------------------------
 %             Main Algorithm: ACO Meta heuristic procedure
 % a.  Probabilistic solution construction biased by
@@ -91,27 +88,33 @@ end
     besttour(i,:)=tour(best_index,:);
     iteration(i)=i;
 end
+toc
 % -------------------------------------------------------------------------
-
+%subplot(3,1,1);
+%plot(x,y,'o','MarkerFaceColor','k','MarkerEdgeColor','b','MarkerSize',10);
+%title('Coordinates of Cities');
+%xlabel('x  (km)');
+%ylabel('y  (km)');
 % Plot Average of tour distance vs Number of Iterations
-subplot(3,1,2);plot(iteration,average_cost);
-title('Average of tour distance vs Number of iterations');
-xlabel('iteration');
-ylabel('distance (km)');
+%subplot(3,1,2);plot(iteration,average_cost);
+%title('Average of tour distance vs Number of iterations');
+%xlabel('iteration');
+%ylabel('distance (km)');
 
 % Plot the best route
-[k,l]=min(min_cost);
-for i=1:n+1
-    X(i)=x(besttour(l,i));
-    Y(i)=y(besttour(l,i));
-end
-subplot(3,1,3);plot(X,Y,'--o',...
-                'MarkerEdgeColor','k',...
-                'MarkerFaceColor','g',...
-                'MarkerSize',10)
-xlabel('x (km)');ylabel('y (km)');
-title(['minimum cost (total length)= ',num2str(k)]);
-end
+%[k,l]=min(min_cost);
+%for i=1:n+1
+%    X(i)=x(besttour(l,i));
+%    Y(i)=y(besttour(l,i));
+%end
+%subplot(3,1,3);plot(X,Y,'--o',...
+%                'MarkerEdgeColor','k',...
+%                'MarkerFaceColor','g',...
+%                'MarkerSize',10)
+%xlabel('x (km)');ylabel('y (km)');
+%title(['minimum cost (total length)= ',num2str(k)]);
+%end
 %**************************************************************************
 %                   Ending of Program                          
 %**************************************************************************
+end
