@@ -1,4 +1,4 @@
-.aux
-.log
-.pdf
-.gz
+tex/*.aux
+tex/*.log
+tex/*.pdf
+tex/*.gz

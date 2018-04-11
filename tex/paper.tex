@@ -1,9 +1,9 @@
 \documentclass[twocolumn]{article}
-
+\usepackage{graphicx}
 \begin{document}	
 	\twocolumn[
 	\begin{@twocolumnfalse}
-		\author{Mohamed Moanis Ali \\ mohamed.moanis.ali@gmail.com}
+		\author{Mohamed Moanis Ali, Michael Sedrak \\  mohamed.moanis.ali@gmail.com, m.sedrak@live.com}
 		\title{Solving TSP With Genetic Algorithms}
 		\maketitle
 		\begin{abstract}
@@ -30,30 +30,45 @@
 	
 	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
 	
-	Aliquam tempor pulvinar sem, sed porta est mollis id. Morbi accumsan felis ipsum, id interdum metus consectetur sit amet. Cras rhoncus luctus ligula, vitae sagittis nibh ornare et. Sed a fermentum nisi. Ut non nulla eu ligula mattis semper. Nulla facilisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-	\section{Algorithm} 
+	\section{Dataset}
+	Datasets for TSP problem contain a wide variety of formats. Cities across a country, VLSI nodes or traveling across the Mona Lisa drawing. But they are all similar in the aspect of the data structure. The structure is a 2-D coordinate point system with euclidean distances as the distance between nodes.
+	For our work we selected the Uruguay dataset from the national dataset collection. Uruguay dataset is characterized by 
+	\begin{itemize}
+		\item 734 unique points (no duplicates)
+		\item Optimal tour of length 79114
+	\end{itemize}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.3]{./tex/uypoints.jpg}
+		\caption{XY coordinate representation of Uruguay dataset}
+		\label{fig:uruguay}
+	\end{figure}
+	A graphical representation of the coordinates of the dataset is shown in figure \ref{fig:uruguay}
 	
+	\section{Algorithms}
+	In this section, the four algorithms are considered with a brief description of how they solve the TSP problem.
+	\subsection{Genetic Algorithm}
 	
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum, urna nec luctus tincidunt, nisi augue vehicula nulla, sit amet sollicitudin nisi nibh eget diam. Vivamus maximus tortor dolor, non porttitor urna vestibulum eu. Nullam maximus in massa eu lacinia. Curabitur ac risus ac elit euismod placerat quis eu odio. Sed ante ex, congue sit amet enim et, aliquam egestas turpis. Cras purus ex, viverra sit amet augue id, tempus ultricies risus. Aenean eget vestibulum orci. Ut enim nisi, tempor id urna et, dignissim ornare lectus. Nunc lobortis risus neque, a fermentum ante consequat ac. Fusce mollis pretium pellentesque. Vestibulum fermentum ornare elementum. Nam rutrum sem ut est mollis consequat. Morbi at faucibus mi. In ultricies justo non lorem varius, non tristique ante suscipit. Curabitur eget diam tincidunt, venenatis enim sagittis, malesuada magna. Nullam in urna a odio finibus tristique.
+	Genetic algorithm is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem.
 	
-	Morbi odio enim, pharetra in tempor in, laoreet eu erat. Integer ac mi posuere, egestas justo ac, varius mauris. Nullam ornare lacus a massa posuere efficitur. Integer non ligula mattis, imperdiet tortor eget, accumsan nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed arcu mi, interdum pretium mauris non, condimentum accumsan elit. Sed ut pulvinar orci. Fusce elementum mi tellus, a fringilla odio tincidunt viverra. Vestibulum erat lorem, vehicula id porttitor sed, varius id nibh. Morbi vel ex nec tortor ultricies facilisis.
+	Genetic algorithm formulates a problem using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each individual solution is called individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
 	
-	Aliquam erat volutpat. Vestibulum eleifend dolor ac nulla maximus, vitae aliquet neque laoreet. Nam vestibulum sem sit amet eros molestie, id pulvinar lectus sollicitudin. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas sed ipsum ex. Maecenas a odio id risus lacinia varius sed vel ex. Etiam finibus efficitur magna, vitae scelerisque velit pharetra sit amet. Phasellus ac sapien in odio posuere tincidunt. Fusce viverra, erat nec tincidunt cursus, magna nulla vulputate nisi, eget volutpat massa nibh in lectus. Mauris nec laoreet lacus. Ut luctus metus a suscipit gravida. Sed placerat purus nulla, ac mattis sem malesuada nec. Nunc et aliquet dolor. Aliquam tincidunt aliquet mi vel hendrerit. Nunc posuere tempus ante, non feugiat ligula vehicula vel. Nunc vitae rhoncus urna.
+	TSP can be easily formulated in GA context. The search space is the set of routes that spans all the cities of Uruguay, and the goal is to find a route with the minimum cost. Each route is considered as an individual with a DNA that resembles the ordered set of towns and cities in the route -genes. The mutation and crossover of individuals is the process of reordering genes in an individual's DNA to produce new individuals. The solution for TSP will be an individual with DNA representing the optimal route between towns and cities that have the minimal distance cost.
 	
-	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
+	The iterative process for solving TSP using GA is given by the following steps:
+	\begin{enumerate}
+		\item Create an initial population of size (N=100).
+		\item Evaluate the fitness of each individual in the population.
+		\item Select (M=4) individuals from the current population using their fitness score as a criterion.
+		\item Mutate selected individuals and create 3 new routes.
+		\item Repeat steps 3 and 4 until all the individuals are mutated.
+		\item Replace the old population with the new mutated one.
+		\item Go back to step 2 if more generations can be mutated or the number of iterations did not reach an upper bound of iterations. Otherwise, the final result is the best population created and the most fit individual is considered TSP solution.  
+	\end{enumerate}
+	It is important to note that the resultant solution is not necessarily the optimal one. Specially, when a limited number of GA iterations is used to reduce the relatively large calculation time to be able to converge to the optimal solution.
 	
-	Aliquam tempor pulvinar sem, sed porta est mollis id. Morbi accumsan felis ipsum, id interdum metus consectetur sit amet. Cras rhoncus luctus ligula, vitae sagittis nibh ornare et. Sed a fermentum nisi. Ut non nulla eu ligula mattis semper. Nulla facilisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-	
-	
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum, urna nec luctus tincidunt, nisi augue vehicula nulla, sit amet sollicitudin nisi nibh eget diam. Vivamus maximus tortor dolor, non porttitor urna vestibulum eu. Nullam maximus in massa eu lacinia. Curabitur ac risus ac elit euismod placerat quis eu odio. Sed ante ex, congue sit amet enim et, aliquam egestas turpis. Cras purus ex, viverra sit amet augue id, tempus ultricies risus. Aenean eget vestibulum orci. Ut enim nisi, tempor id urna et, dignissim ornare lectus. Nunc lobortis risus neque, a fermentum ante consequat ac. Fusce mollis pretium pellentesque. Vestibulum fermentum ornare elementum. Nam rutrum sem ut est mollis consequat. Morbi at faucibus mi. In ultricies justo non lorem varius, non tristique ante suscipit. Curabitur eget diam tincidunt, venenatis enim sagittis, malesuada magna. Nullam in urna a odio finibus tristique.
-	
-	Morbi odio enim, pharetra in tempor in, laoreet eu erat. Integer ac mi posuere, egestas justo ac, varius mauris. Nullam ornare lacus a massa posuere efficitur. Integer non ligula mattis, imperdiet tortor eget, accumsan nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed arcu mi, interdum pretium mauris non, condimentum accumsan elit. Sed ut pulvinar orci. Fusce elementum mi tellus, a fringilla odio tincidunt viverra. Vestibulum erat lorem, vehicula id porttitor sed, varius id nibh. Morbi vel ex nec tortor ultricies facilisis.
-	
-	Aliquam erat volutpat. Vestibulum eleifend dolor ac nulla maximus, vitae aliquet neque laoreet. Nam vestibulum sem sit amet eros molestie, id pulvinar lectus sollicitudin. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas sed ipsum ex. Maecenas a odio id risus lacinia varius sed vel ex. Etiam finibus efficitur magna, vitae scelerisque velit pharetra sit amet. Phasellus ac sapien in odio posuere tincidunt. Fusce viverra, erat nec tincidunt cursus, magna nulla vulputate nisi, eget volutpat massa nibh in lectus. Mauris nec laoreet lacus. Ut luctus metus a suscipit gravida. Sed placerat purus nulla, ac mattis sem malesuada nec. Nunc et aliquet dolor. Aliquam tincidunt aliquet mi vel hendrerit. Nunc posuere tempus ante, non feugiat ligula vehicula vel. Nunc vitae rhoncus urna.
-	
-	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
-	
-	Aliquam tempor pulvinar sem, sed porta est mollis id. Morbi accumsan felis ipsum, id interdum metus consectetur sit amet. Cras rhoncus luctus ligula, vitae sagittis nibh ornare et. Sed a fermentum nisi. Ut non nulla eu ligula mattis semper. Nulla facilisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+	\subsection{Simulated Annealing}
+	 
 	\section{Results}
 	
 	
