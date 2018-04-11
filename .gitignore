@@ -2,3 +2,7 @@
 .log
 .pdf
 .gz
+*.aux
+*.log
+*.pdf
+*.gz
