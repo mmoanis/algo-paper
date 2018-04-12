@@ -1,5 +1,8 @@
 \documentclass[twocolumn]{article}
 \usepackage{graphicx}
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amssymb}
 \begin{document}	
 	\twocolumn[
 	\begin{@twocolumnfalse}
@@ -38,7 +41,7 @@
 	\end{itemize}
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[scale=0.3]{./tex/uypoints.jpg}
+		\includegraphics[scale=0.3]{./uypoints.jpg}
 		\caption{XY coordinate representation of Uruguay dataset}
 		\label{fig:uruguay}
 	\end{figure}
@@ -48,7 +51,7 @@
 	In this section, the four algorithms are considered with a brief description of how they solve the TSP problem.
 	\subsection{Genetic Algorithm}
 	
-	Genetic algorithm is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem.
+	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem.
 	
 	Genetic algorithm formulates a problem using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each individual solution is called individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
 	
@@ -67,7 +70,31 @@
 	It is important to note that the resultant solution is not necessarily the optimal one. Specially, when a limited number of GA iterations is used to reduce the relatively large calculation time to be able to converge to the optimal solution.
 	
 	\subsection{Simulated Annealing}
+	 Simulated annealing (SA) is another algorithm that mimic a natural phenomena; this time it is the heat treatment process used on metals. During the annealing process, a metal is heated enough to allow its molecular structure to be altered. The temperature {\bfseries T} is steadily lowered by a cooling constant {$\boldsymbol \beta$}, which subsequently lowers the energy of the atoms and restricts their arrangement until the metal's structure finally becomes set. That in turn, minimizes the number of defects in the structure of the metal.
 	 
+	 SA can be considered as a modification for greedy search as an attempt to reach an optimal solution rather than getting stuck at a local optimum. For example, consider a problem of searching a function with the goal of reaching the global optimum. A greedy approach would move in the direction that result in a higher gain and stops once no more moves would lead to a higher gain, thus, a greedy approach can miss the global optimal solution.
+	 
+	 In contrast to greedy approach, SA occasionally allows moves in directions with lower gain that would not have been accessible otherwise. SA starts at random solution -a state {\bfseries S}- and then at each iteration step, the solution is slightly modified in order to choose another search point and move to a new state $\boldsymbol{S\prime}$. This modification is made with a random reorder of a constant number of elements in the solution space {\bfseries M}. The selection process of the new state -solution- considers the change in cost {\bfseries C} - know as {$\boldsymbol \gamma$}- that will be incurred if the new state is chosen. When the cost is going to be lower, the new state is chosen. Else, however, the incurred cost might increase there is still a chance to accept this state with a probability \\{\bfseries P({$\boldsymbol \gamma$}, T)} that is relative to the current temperature of the simulation; that's it, when the current temperature is high, the probability to take worse solutions will be higher as there still more simulation time available to try different search point in order to reach the global optimum.
+	 
+	 In the context of TSP, each state in SA algorithm is a route between the towns and cities. The cost measured for each route is the distance  between its points and accordingly the optimal solution is that with the minimum distance. SA algorithm would then work in the following steps:
+	 \begin{enumerate}
+	 	\item Choose random state {\bfseries S} and the starting temperature {\bfseries T} and cooling constant {$\boldsymbol \beta$}.
+	 	\item Create new state $\boldsymbol{S\prime}$ by randomly swapping {\bfseries M} cities in the current state.
+	 	\item Compute the change in cost \[
+	 	\boldsymbol{\gamma = \dfrac{C(S')-C(S)}{C(S)}}
+	 	\]
+	 	\item If {$\boldsymbol{\gamma \leqslant 0}$, then {\bfseries S =} $\boldsymbol{S\prime}$.}
+	 	\item Else, compute the probability \[
+	 	\boldsymbol{P(\gamma, T)=}
+	 	\begin{cases}
+	 	\boldsymbol{1},& \text{if } \boldsymbol{\gamma\leqslant 0}\\
+	 	\boldsymbol{e^{\frac{-\gamma}{T}}},& \text{otherwise}
+	 	\end{cases} 
+	 	\]
+	 	\item Randomly assign {\bfseries S =} $\boldsymbol{S\prime}$ using {$\boldsymbol \gamma$}.
+	 	\item Repeat steps 2 to 6 until stopping conditions are met; ie, temperature reaches a certain threshold or a required number of iterations is met.
+	 \end{enumerate}
+	 Finally, the performance of SA can be controlled by the choice of the initial temperature, cooling constant and the number of cities modified in each step. Additionally, the stopping conditions are of quite importance for SA to reach a near optimal solution. If the algorithm is stopped too soon, the approximation will not be as close to the global optimum. And if the algorithm is not stopped soon enough, more time will be wasted on calculations and search steps with little to no gain.
 	\section{Results}
 	
 	
