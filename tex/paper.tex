@@ -1,8 +1,11 @@
 \documentclass[twocolumn]{article}
-\usepackage{graphicx}
+
 \usepackage{bm}
+\usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{url}
+
 \begin{document}	
 	\twocolumn[
 	\begin{@twocolumnfalse}
@@ -18,23 +21,22 @@
 	%% Document body starts from here
 	
 	\section{Introduction}
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum, urna nec luctus tincidunt, nisi augue vehicula nulla, sit amet sollicitudin nisi nibh eget diam. Vivamus maximus tortor dolor, non porttitor urna vestibulum eu. Nullam maximus in massa eu lacinia. Curabitur ac risus ac elit euismod placerat quis eu odio. Sed ante ex, congue sit amet enim et, aliquam egestas turpis. Cras purus ex, viverra sit amet augue id, tempus ultricies risus. Aenean eget vestibulum orci. Ut enim nisi, tempor id urna et, dignissim ornare lectus. Nunc lobortis risus neque, a fermentum ante consequat ac. Fusce mollis pretium pellentesque. Vestibulum fermentum ornare elementum. Nam rutrum sem ut est mollis consequat. Morbi at faucibus mi. In ultricies justo non lorem varius, non tristique ante suscipit. Curabitur eget diam tincidunt, venenatis enim sagittis, malesuada magna. Nullam in urna a odio finibus tristique.
+	The traveling salesman problem (TSP) is a classical combinatorial optimization problem with a long history -dating back to 1832, and countless number of real life applications\cite{applegate07}\cite{punnen07}. It was first mentioned in a handbook for traveling salesmen in Germany and Switzerland to be mathematically formulated later in 1930. Though easy to describe, TSP is a NP-hard problem; that's it, there is no polynomial time algorithm to solve it. This limits the use of exact methods which have a time complexity of $O(n!)$ to a small number of cities.
+	The problem is to find the shortest route between a given set of cities' locations where each city must be visited only once and the trip must end by returning back to the starting city. TSP can be modeled as an undirected weighted graph, such that cities are the graph's vertices and paths between cities are the graph's edges. The distance between two given cities in both direction can be the same which is called symmetric TSP and can differ in case of asymmetric variant. In this work, we will only consider the symmetric TSP.
+	The optimization problem to solve TSP can be formulated as a linear programming problem as follows\cite{papadimitriou98} \[
+	min \sum_{i=1}^{n} \sum_{j=1, j\neq i}^{n} {c_i}_j {x_i}_j
+	\] where ${c_i}_j$ is the cost between cities $i$ and $j$ and ${x_i}_j$ is given by\[
+	{x_i}_j = 
+	\begin{cases}
+		1,& \text{path goes from i to j}\\
+		0,& \text{otherwise}
+	\end{cases}
+	\]
+	The complexity of TSP, makes room for approximate algorithms to arise\cite{Brucal17}. Such algorithms can reach near optimal solution in a reasonable time as will be seen in this work. Algorithms such as variable neighborhood search\cite{Thanh15}, genetic algorithm\cite{Wang17}, monte-carlo trees search\cite{Perez14}, adaptive bee colony\cite{Rekaby13}, meta-learning\cite{Kanda11}, machine learning\cite{Pihera14}, simulated annealing\cite{Kerrache14}, ant colony optimization\cite{Swiatnicki15}, harmony search\cite{Tongchan17}, biography based approximation\cite{Wu17} and variations of neural networks\cite{Gao10}\cite{Mueller15} have addressed the TSP. In this work we will focus on four of such algorithms, namely: genetic algorithm\cite{Kirk14}\cite{mathwork}, simulated annealing\cite{Jang02}, nearest neighbor search\cite{Jevtic14} and ant colony optimization\cite{Ibrahim15}. This survey will compare {Matlab\texttrademark}  implementation of the four algorithms in terms of runtime performance and how close they are to the optimal solution.
 	
-	Morbi odio enim, pharetra in tempor in, laoreet eu erat. Integer ac mi posuere, egestas justo ac, varius mauris. Nullam ornare lacus a massa posuere efficitur. Integer non ligula mattis, imperdiet tortor eget, accumsan nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed arcu mi, interdum pretium mauris non, condimentum accumsan elit. Sed ut pulvinar orci. Fusce elementum mi tellus, a fringilla odio tincidunt viverra. Vestibulum erat lorem, vehicula id porttitor sed, varius id nibh. Morbi vel ex nec tortor ultricies facilisis.
-	
-	Aliquam erat volutpat. Vestibulum eleifend dolor ac nulla maximus, vitae aliquet neque laoreet. Nam vestibulum sem sit amet eros molestie, id pulvinar lectus sollicitudin. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas sed ipsum ex. Maecenas a odio id risus lacinia varius sed vel ex. Etiam finibus efficitur magna, vitae scelerisque velit pharetra sit amet. Phasellus ac sapien in odio posuere tincidunt. Fusce viverra, erat nec tincidunt cursus, magna nulla vulputate nisi, eget volutpat massa nibh in lectus. Mauris nec laoreet lacus. Ut luctus metus a suscipit gravida. Sed placerat purus nulla, ac mattis sem malesuada nec. Nunc et aliquet dolor. Aliquam tincidunt aliquet mi vel hendrerit. Nunc posuere tempus ante, non feugiat ligula vehicula vel. Nunc vitae rhoncus urna.
-	
-	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
-	
-	Aliquam tempor pulvinar sem, sed porta est mollis id. Morbi accumsan felis ipsum, id interdum metus consectetur sit amet. Cras rhoncus luctus ligula, vitae sagittis nibh ornare et. Sed a fermentum nisi. Ut non nulla eu ligula mattis semper. Nulla facilisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-	Morbi odio enim, pharetra in tempor in, laoreet eu erat. Integer ac mi posuere, egestas justo ac, varius mauris. Nullam ornare lacus a massa posuere efficitur. Integer non ligula mattis, imperdiet tortor eget, accumsan nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed arcu mi, interdum pretium mauris non, condimentum accumsan elit. Sed ut pulvinar orci. Fusce elementum mi tellus, a fringilla odio tincidunt viverra. Vestibulum erat lorem, vehicula id porttitor sed, varius id nibh. Morbi vel ex nec tortor ultricies facilisis.
-	
-	Aliquam erat volutpat. Vestibulum eleifend dolor ac nulla maximus, vitae aliquet neque laoreet. Nam vestibulum sem sit amet eros molestie, id pulvinar lectus sollicitudin. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas sed ipsum ex. Maecenas a odio id risus lacinia varius sed vel ex. Etiam finibus efficitur magna, vitae scelerisque velit pharetra sit amet. Phasellus ac sapien in odio posuere tincidunt. Fusce viverra, erat nec tincidunt cursus, magna nulla vulputate nisi, eget volutpat massa nibh in lectus. Mauris nec laoreet lacus. Ut luctus metus a suscipit gravida. Sed placerat purus nulla, ac mattis sem malesuada nec. Nunc et aliquet dolor. Aliquam tincidunt aliquet mi vel hendrerit. Nunc posuere tempus ante, non feugiat ligula vehicula vel. Nunc vitae rhoncus urna.
-	
-	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
 	\section{Dataset}
 	Datasets for TSP problem contain a wide variety of formats. Cities across a country, VLSI nodes or traveling across the Mona Lisa drawing. But they are all similar in the aspect of the data structure. The structure is a 2-D coordinate point system with euclidean distances as the distance between nodes.
-	For our work we selected the Uruguay dataset from the national dataset collection. Uruguay dataset is characterized by 
+	For our work we selected the Uruguay dataset from the national dataset collection\cite{UY734} to be used to assess the four algorithms in this survey in terms of runtime performance and how close is their solutions compared to the dataset know optimal solution. Uruguay dataset is characterized by 
 	\begin{itemize}
 		\item 734 unique points (no duplicates)
 		\item Optimal tour of length 79114
@@ -234,7 +236,111 @@
 	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
 	
 	Aliquam tempor pulvinar sem, sed porta est mollis id. Morbi accumsan felis ipsum, id interdum metus consectetur sit amet. Cras rhoncus luctus ligula, vitae sagittis nibh ornare et. Sed a fermentum nisi. Ut non nulla eu ligula mattis semper. Nulla facilisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-	\section{References}
+
+	\begin{thebibliography}{999}
+		\bibitem{applegate07}
+		Applegate, D. L., Bixby, R. E., Chvatal, V.,  and Cook, W. J., (2007).
+		\emph{The Traveling Salesman Problem: A Computational Study (Princeton Series in Applied Mathematics)}.
+		Princeton, NJ, USA,
+		Princeton University Press
+		\bibitem{punnen07}
+		Punnen, A. P., (2007).
+		\emph{The Traveling Salesman Problem: Applications, formulations and variations}.
+		Vol. 12 of Combinatorial Optimization,
+		Springer US,
+		pp. 1-28
+		\bibitem{papadimitriou98}
+		Papadimitriou, C.H.,Steiglitz, K., (1998).
+		\emph{Combinatorial optimization: algorithms and complexity}. Mineola, NY:Dover,
+		pp. 308-309
+		\bibitem{Brucal17}
+		Brucal, S. G., Dadios, E. (2017).
+		\emph{Comparative Analysis of Solving Traveling Salesman Problem using Artificial Intelligence Algorithms}.
+		2017 IEEE $9^{th}$ International Conference on Humanoid, Nanotechnology, Information Technology, Communication and Control, Environment and Management (HNICEM).
+		\bibitem{Thanh15}
+		Thanh, D., Ninh, H.(2015).
+		\emph{An Effective Combination of Genetic Algorithms and the Variable Neighborhood Search for Solving Traveling Salesman Problem.}
+		2015 Conference on Technologies and Applications on Artificial Intelligence (TAAI),
+		pp. 142-149
+		\bibitem{Wang17}
+		Wang, X., Pengcheng, Li, Wang Lin, Wang Lei, (2017).
+		\emph{A Nobel Genetic Algorithm Based on Circles for Larger-Scale Traveling Salesman Problem}. 2017 International Conference on Robotics and Automation Sciences (ICRAS).
+		\bibitem{Perez14}
+		Perez, D., Powley, E., Whitehouse, D., Rohlfshagen, P., Samothrakis, S., Cowling, P. Lucas, S. (2014).
+		\emph{Solving the Physical Traveling Salesman Problem Using Tree Search and Macro Actions}. IEEE Transaction on Computational Intelligence and AI in Games, Vol 6. No. 1, March 2014,
+		pp. 31-45
+		\bibitem{Rekaby13}
+		Rekaby, A., Youssif, A.A., Eldin, A. (2013).
+		\emph{Introducing Adaptive Artificial Bee Colony Algorithm and Using it in Solving Traveling Salesman Problem}.
+		Science and Information Conference 2013,
+		pp. 502-506
+		\bibitem{Kanda11}
+		Kanda, J., de Carvalho, A., Hruschka, E., Soares, C. (2011).
+		\emph{Using meta-learning to recommend meta-heuristics for the traveling salesman problem}. 2011 $10^{th}$ International Conference on Machine Learning and Applications,
+		pp. 346-351
+		\bibitem{Pihera14}
+		Pihera, J., Musliu, N. (2014).
+		\emph{Application of Machine Learning to Algorithm Selection for TSP}. 2014 IEEE $26^{th}$ International Conference on Tools with Artificial Intelligence,
+		pp 47-54
+		\bibitem{Kerrache14}
+		Kerrache, S., Benhidour, H. (2014).
+		\emph{Topology-aware Simulated Annealing}.
+		2014 Second International Conference on Artificial Intelligence, Modeling and Simulation,
+		pp 19-24
+		\bibitem{Swiatnicki15}
+		Swiatnicki, Z. (2015).
+		\emph{Application of Ant Colony Optimization Algorithm for Transportation Problems Using the Example of the Traveling Salesman Problem}.
+		2015 $4^{th}$ IEEE International Conference on Advanced Logistics and Transport (ICALT),
+		pp 82-87
+		\bibitem{Tongchan17}
+		Tongchan, T., Pornsing, C., Tonglim, T. (2017).
+		\emph{Harmony Search Algorithm's Parameter Tuning for Traveling Salesman Problem}.
+		2017 International Conference on Robotics and Automation Sciences (ICRAS)
+		\bibitem{Wu17}
+		Wu, J., Feng S. (2017).
+		\emph{Improved Biogeography-Based Optimization for the Traveling Salesman Problem}.
+		2017 Second International Conference on Computational Intelligence and Applications
+		\bibitem{Gao10}
+		Gao, Y., Deng, C., Jiang, G. (2010).
+		\emph{Improvement of Hopfield Neural Network Algorithm}.
+		2010 Second International Conference on Computer Engineering and Technology,
+		pp 517-521
+		\bibitem{Mueller15}
+		Mueller, C., Kiehne, N. (2015).
+		\emph{Hybrid Approach for TSP Based on Neural Networks and Ant Colony Optimization}.
+		2015 IEEE Symposium Series on Computational Intelligence,
+		pp 1431-1435
+		\bibitem{Kirk14}
+		Kirk, J.
+		\emph{Open Traveling Salesman Problem - Genetic Algorithm}. 2014 [Online].
+		Available: \url{http://www.mathworks.com/matlabcentral/fileexchange/21196-
+			open-traveling-salesman-problem-genetic-algorithm}. [Accessed: 12-April-2018]
+		\bibitem{mathwork}
+		\emph{Custom Data Type Optimization Using the Genetic Algorithm}.
+		\url{http://www.mathworks.com/help/gads/examples/custom-data-type-optimization-using-the-genetic-algorithm.html?s_tid=answers_rc2-1_p4_MLT}. [Accessed: 12-April-2018]
+		\bibitem{Jang02}
+		Jang, J. R.
+		\emph{Neuro-Fuzzy and Soft Computing}, 2002. [Online].
+		Available: \url{https://www.mathworks.com/matlabcentral/fileexchange/2173-
+			neuro-fuzzy-and-soft-computing?focused=5041127&tab=
+			function}. [Accessed: 12-April-2018]
+		\bibitem{Jevtic14}
+		Jevtic, A.
+		\emph{Nearest Neighbor Algorithm for the Travelling Salesman Problem}, 2014. [Online]. Available: \url{https://www.mathworks.com/matlabcentral/fileexchange/25542-
+			nearest-neighbor-algorithm-for-the-travelling-salesman-
+			problem}. [Accessed: 12-April-2018]
+		\bibitem{Ibrahim15}
+		Ibrahim, S.
+		\emph{Ant Colony Optimization (ACO) to solve traveling salesman problem (TSP)}, 2015. [Online]. Available: \url{https://www.mathworks.com/matlabcentral/fileexchange/51113-
+			ant-colony-optimization--aco--to-solve-traveling-salesman-
+			problem--tsp-?focused=3878286&tab=function}. [Accessed: 12-April-2018]
+		\bibitem{UY734}
+		Cock, W. \emph{Uruguay TSP dataset UY734}. [Online]
+		\url{http://www.math.uwaterloo.ca/tsp/world/uypoints.html}. [Accessed: 12-April-2018]
+		
+		
+	\end{thebibliography}
+>>>>>>> b947106f86dab8a81a7da37af7b46c64680ec223
 \end{document}
 
 
