@@ -124,7 +124,7 @@
 	The NN approach is greedy in nature, usually resulting in a non optimal solution. It can miss shorter routes that might be noticed with human sight. Based on the distribution of cities, the NN approach may provide the optimal solution.
 	
 	\subsection{Ant Colony Optimization (ACO)}
-	The Ant Colony Optimization (ACO) algorithms tries to mimic the natural phenomenon of ants finding a path from a food source to the colony. Ants start first going at random paths in the paths, leaving trails of a chemical substance called pheromone behind. Pheromone evaporates with time, therefore shorter paths tend have heavier trails of pheromone as they are marched more frequently thus attracting more ants to this path. Since pheromone evaporates this provides an advantage of avoiding the convergence to a local minimum path. In other words, if pheromone did evaporate at all, the paths chosen by the first ants would still attract the following ants.
+	The Ant Colony Optimization (ACO) algorithms tries to mimic the natural phenomenon of ants finding a path from a food source to the colony. Ants start first going at random paths, leaving trails of a chemical substance called pheromone behind. Pheromone evaporates with time, therefore shorter paths tend have heavier trails of pheromone as they are marched more frequently thus attracting more ants to this path. Since pheromone evaporates this provides an advantage of avoiding the convergence to a local minimum path. In other words, if pheromone did not evaporate at all, the paths chosen by the first ants would still attract the following ants.
 	
 	\begin{figure}[h!]
 		\centering
@@ -160,14 +160,14 @@
 	\begin{itemize}
 		\renewcommand{\labelitemi}{-}
 		\item $\textit{p}^\textit{k}_\textit{ij}$ is the probability that city \textit{j} will be selected after city \textit{i} by ant \textit{k}.
-		\item $\tau_{is}$ is the intensity of pheromone between cities \textit{i} and \textit{j}.
+		\item $\tau_{ij}$ is the intensity of pheromone between cities \textit{i} and \textit{j}.
 		\item $\alpha$ is the parameter to regulate the influence of trails of pheromone.
 		\item $\eta$ is the visibility of city \textit{j} from city \textit{i} which is always measured as $\dfrac{1}{\text{distance between cities \textit{i} and \textit{j}}}$.
 		\item $\beta$ is the parameter to regulate the influence of $\eta_{ij}$
 		\item allowed$_k$ is the set of unvisited cities.
 	\end{itemize}
 
-	At the beginning of the algorithm, \textit{N} ants are assigned initial starting points (cities) at random. As the iterations proceed, ants decide which cities to visit according to $\textit{p}_\textit{ij}$ described in Eq. (\ref{eq:ACOprobability}). After \textit{n} iterations, each ant completes a tour. Tours with shorter distances, have stronger pheromone trails. Therefore updating the trails follow \textit{Q}/\textit{L}$_\textit{k}$ where \textit{Q} is a constant value and \textit{L}$_\textit{k}$ is the path length. Also as we mentioned before the pheromone trails evaporate with time. Therefore we can update $\tau_{is}$ according to the following equations:
+	At the beginning of the algorithm, \textit{N} ants are assigned initial starting points (cities) at random. As the iterations proceed, ants decide which cities to visit according to $\textit{p}_\textit{ij}$ described in Eq. (\ref{eq:ACOprobability}). After \textit{n} iterations, each ant completes a tour. Tours with shorter distances, have stronger pheromone trails. Therefore updating the trails follow \textit{Q}/\textit{L}$_\textit{k}$ where \textit{Q} is a constant value and \textit{L}$_\textit{k}$ is the path length. Also as we mentioned before the pheromone trails evaporate with time. Therefore we can update $\tau_{ij}$ according to the following equations:
 	
 	\begin{equation} \label{eq:ACOTrailUpdate1}
 		\tau_{ij}(t+1) = \rho \textbf{.} \tau_{ij}(t) + \Delta\tau_{ij}
@@ -212,7 +212,7 @@
 	\end{itemize}
 	
 	\section{Results}
-	The codes to solve the TSP problem [links!!!] were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the first trial and a maximum time of 118.9 seconds on the 8$^th$ trial, the shortest path found was on the 6$^th$ iteration, of length 226,854.7 which is 65\% within the optimal solution. While the optimized GA algorithms produced much better running times for the same number of iterations with a minimum of 23.8 seconds on th first run and a maximum of 32.1 seconds on the 7$^th$ run, the final path length didn't differ much from the previous implementation, a path of length 200068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
+	The codes to solve the TSP problem [links!!!] were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the first trial and a maximum time of 118.9 seconds on the 8$^{th}$ trial, the shortest path found was on the 6$^{th}$ iteration, of length 226,854.7 which is 65\% within the optimal solution. While the optimized GA algorithms produced much better running times for the same number of iterations with a minimum of 23.8 seconds on th first run and a maximum of 32.1 seconds on the 7$^{th}$ run, the final path length didn't differ much from the previous implementation, a path of length 200068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
 	
 	\begin{figure}[h!]
 		\centering
@@ -222,9 +222,9 @@
 		\label{fig:GAalgorithm}
 	\end{figure}
 	
-	Simulated annealing approach tested on Octave produced a minimum running time of 1217 seconds at the 4$^th$ test and a maximum of 1526.3 seconds at the 10$^th$ test, while on Matlab a minimum of 62.8 seconds and a maximum of 107.5 seconds running times were produced on the first and last tests respectively. The shortest path solution produced to our dataset was of length 89237 which is within 11.34\% of the optimal solution.
+	Simulated annealing approach tested on Octave produced a minimum running time of 1217 seconds at the 4$^{th}$ test and a maximum of 1526.3 seconds at the 10$^{th}$ test, while on Matlab a minimum of 62.8 seconds and a maximum of 107.5 seconds running times were produced on the first and last tests respectively. The shortest path solution produced to our dataset was of length 89237 which is within 11.34\% of the optimal solution.
 	
-	The nearest neighbor tests conducted on Octave provided running times ranging between 132 seconds and 136 seconds, which are approximately 7 to 10 times less than all other conducted tests of different algorithms. On Matlab, the tests took 10.8 seconds for the quickest run and 15.4 seconds for the longest run on the 1$^st$ and 5$^th$ runs respectively. The nearest neighbor implementation conducted did not take a random starting point and therefore all runs provided the same path length of 96,514.8 which is approximately 18\%  within the optimal solution. Results of NN run is shown in fig.\ref{fig:NNalgorithm}
+	The nearest neighbor tests conducted on Octave provided running times ranging between 132 seconds and 136 seconds, which are approximately 7 to 10 times less than all other conducted tests of different algorithms. On Matlab, the tests took 10.8 seconds for the quickest run and 15.4 seconds for the longest run on the 1$^{st}$ and 5$^{th}$ runs respectively. The nearest neighbor implementation conducted did not take a random starting point and therefore all runs provided the same path length of 96,514.8 which is approximately 18\%  within the optimal solution. Results of NN run is shown in fig.\ref{fig:NNalgorithm}
 	
 	\begin{figure}[h!]
 		\centering
