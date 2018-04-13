@@ -4,5 +4,4 @@ tex/*.pdf
 tex/*.gz
 *.aux
 *.log
-*.pdf
 *.gz
