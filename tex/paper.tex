@@ -212,7 +212,7 @@
 	\end{itemize}
 	
 	\section{Results}
-	The codes to solve the TSP problem\cite{Kirk14}\cite{mathwork}\cite{Jang02}\cite{Jevtic14}\cite{Ibrahim15} were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the first trial and a maximum time of 118.9 seconds on the 8$^{th}$ trial, the shortest path found was on the 6$^{th}$ iteration, of length 226,854.7 which is 65\% within the optimal solution. While the optimized GA algorithms produced much better running times for the same number of iterations with a minimum of 23.8 seconds on th first run and a maximum of 32.1 seconds on the 7$^{th}$ run, the final path length didn't differ much from the previous implementation, a path of length 200068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
+	The codes to solve the TSP problem\cite{Kirk14}\cite{mathwork}\cite{Jang02}\cite{Jevtic14}\cite{Ibrahim15} were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the first trial and a maximum time of 118.9 seconds on the 8$^{th}$ trial, the shortest path found was on the 6$^{th}$ iteration, of length 226,854.7 which is 65\% within the optimal solution. While the optimized GA algorithms produced much better running times for the same number of iterations with a minimum of 23.8 seconds on th first run and a maximum of 32.1 seconds on the 7$^{th}$ run, the final path length didn't differ much from the previous implementation, a path of length 200,068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
 	
 	\begin{figure}[h!]
 		\centering
@@ -222,7 +222,7 @@
 		\label{fig:GAalgorithm}
 	\end{figure}
 	
-	Simulated annealing approach tested on Octave produced a minimum running time of 1217 seconds at the 4$^{th}$ test and a maximum of 1526.3 seconds at the 10$^{th}$ test, while on Matlab a minimum of 62.8 seconds and a maximum of 107.5 seconds running times were produced on the first and last tests respectively. The shortest path solution produced to our dataset was of length 89237 which is within 11.34\% of the optimal solution.
+	Simulated annealing approach tested on Octave produced a minimum running time of 1217 seconds at the 4$^{th}$ test and a maximum of 1526.3 seconds at the 10$^{th}$ test, while on Matlab a minimum of 62.8 seconds and a maximum of 107.5 seconds running times were produced on the first and last tests respectively. The shortest path solution produced to our dataset was of length 89,237 which is within 11.34\% of the optimal solution.
 	
 	The nearest neighbor tests conducted on Octave provided running times ranging between 132 seconds and 136 seconds, which are approximately 7 to 10 times less than all other conducted tests of different algorithms. On Matlab, the tests took 10.8 seconds for the quickest run and 15.4 seconds for the longest run on the 1$^{st}$ and 5$^{th}$ runs respectively. The nearest neighbor implementation conducted did not take a random starting point and therefore all runs provided the same path length of 96,514.8 which is approximately 18\%  within the optimal solution. Results of NN run is shown in fig.\ref{fig:NNalgorithm}
 	
@@ -233,9 +233,9 @@
 		\label{fig:NNalgorithm}
 	\end{figure}
 	
-	The ant colony tests resulted in running times between 777.8 seconds and 790 seconds on Octave and between 11.7 seconds and 16.8 seconds on Matlab. The algorithm default parameters used runs the algorithm for 10 iterations and the shortest path length found was of length 951387 and that is 91.5\% within the optimal solution. A run for 100 iterations was conducted. This took 130 seconds to complete and provided a path of length 880279, 91\% within the optimal solution and 0.5\% better than the previous run.
+	The ant colony tests resulted in running times between 777.8 seconds and 790 seconds on Octave and between 11.7 seconds and 16.8 seconds on Matlab. The algorithm default parameters used runs the algorithm for 10 iterations and the shortest path length found was of length 951387 and that is 91.5\% within the optimal solution. A run for 100 iterations was conducted. This took 130 seconds to complete and provided a path of length 880,279, 91\% within the optimal solution and 0.5\% better than the previous run.
 	
-	The previous results are tabulated in Table \ref{tab:results}
+	The previous results are tabulated in Table \ref{tab:results}.
 	
 
 	\begin{table}[h!]
@@ -254,7 +254,7 @@
 			running time & & & & & \\
 			
 			\hline
-			{\multirow{2}{*}{Generated}} & {226854} &{89237}& {96514} &{951387} &{200068} \\
+			{\multirow{2}{*}{Generated}} & {226,854} &{89,237}& {96,514} &{951,387} &{200,068} \\
 			path length & & & & & \\
 			
 			\hline
@@ -270,7 +270,7 @@
 	\section{Conclusion}
 	In this study, we have provided a comparative analysis between the four algorithms -GA, SA, NN, and ACO- for solving the TSP using free {Matlab\texttrademark} implementations. The analysis was focused on measuring the runtime performance and how close is the solution from the known optimal solution of the the Uruguay dataset of 734 unique points. Furthermore, the experiments were run on both {Matlab\texttrademark} and Octave software to highlight the differences between the two in terms of performance.
 	
-	Within the considered algorithms, SA managed to produce the most optimal solution at a $11.34\%$ of the optimal solution, however, it was one of the slowest implementations. The NN algorthim, although a simple algorithm, it produced the second most optimal solution only at $18\%$ from the global optimum and interestingly with the fastest runtime between all the other algorithms. On the contrary, ACO proved to be the least correct algorithm with $91.5\%$ from the global optimum.
+	Within the considered algorithms, SA managed to produce the most optimal solution at a $11.34\%$ of the optimal solution, however, it was one of the slowest implementations. The NN algorthim, although a simple algorithm, produced the second most optimal solution only at $18\%$ from the global optimum and interestingly with the fastest runtime between all the other algorithms. On the contrary, ACO proved to be the least correct algorithm with $91.5\%$ from the global optimum. Another important finding, is that the GA, the newer optimized implementation have managed to improve the runtime performance considerably.
 	
 	Additionally, the difference between the runtime performance of the four algorithms when run on both {Matlab\texttrademark} and Octave was found to be very huge; for example in the case of GA, {Matlab\texttrademark} was 380x faster. This can draw a conclusion that the current state of {Matlab\texttrademark} software far exceeds it's free open source alternative Octave.
 	\begin{thebibliography}{999}
