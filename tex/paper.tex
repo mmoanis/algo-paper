@@ -13,8 +13,9 @@
 		\title{Solving TSP With Genetic Algorithms}
 		\maketitle
 		\begin{abstract}
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum, urna nec luctus tincidunt, nisi augue vehicula nulla, sit amet sollicitudin nisi nibh eget diam. Vivamus maximus tortor dolor, non porttitor urna vestibulum eu. Nullam maximus in massa eu lacinia. Curabitur ac risus ac elit euismod placerat quis eu odio. Sed ante ex, congue sit amet enim et, aliquam egestas turpis. Cras purus ex, viverra sit amet augue id, tempus ultricies risus. Aenean eget vestibulum orci. Ut enim nisi, tempor id urna et, dignissim ornare lectus. Nunc lobortis risus neque, a fermentum ante consequat ac. Fusce mollis pretium pellentesque. Vestibulum fermentum ornare elementum. Nam rutrum sem ut est mollis consequat. Morbi at faucibus mi. In ultricies justo non lorem varius, non tristique ante suscipit. Curabitur eget diam tincidunt, venenatis enim sagittis, malesuada magna. Nullam in urna a odio finibus tristique.
+			The traveling salesman problem is considered one of hardest problems in computer science with no polynomial runtime algorithm to solve it so far. Nevertheless, TSP is an active research point with more algorithms being developed to either approximately solve the original problem, or to speed it up so larger datasets can be solved. In this work we present a comparative study using four algorithms to solve TSP -genetic algorithm, simulated annealing, nearest neighbor and ant colony optimization to analyze the runtime performance and the correctness of their solution.  The results of the experiments on the Uruguay dataset -using both {Matlab\texttrademark}  and {Octave\texttrademark}- showed that the nearest neighbor algorithm provided the fastest runtime and a relatively correct solution with $18\%$ from the known optimal solution, while the ant colony optimization proved to be the least correct among the studied algorithms. The study also found a huge performance difference between {Matlab\texttrademark}  and {Octave\texttrademark} software.
 		\end{abstract}
+		
 	\end{@twocolumnfalse}
 	]
 	
@@ -24,17 +25,20 @@
 	The traveling salesman problem (TSP) is a classical combinatorial optimization problem with a long history -dating back to 1832, and countless number of real life applications\cite{applegate07}\cite{punnen07}. It was first mentioned in a handbook for traveling salesmen in Germany and Switzerland to be mathematically formulated later in 1930. Though easy to describe, TSP is a NP-hard problem; that's it, there is no polynomial time algorithm to solve it. This limits the use of exact methods which have a time complexity of $O(n!)$ to a small number of cities.
 	
 	The problem is to find the shortest route between a given set of cities' locations where each city must be visited only once and the trip must end by returning back to the starting city. TSP can be modeled as an undirected weighted graph, such that cities are the graph's vertices and paths between cities are the graph's edges. The distance between two given cities in both direction can be the same which is called symmetric TSP and can differ in case of asymmetric variant. In this work, we will only consider the symmetric TSP.
-	
-	The optimization problem to solve TSP can be formulated as a linear programming problem as follows\cite{papadimitriou98} \[
+
+	The optimization problem to solve TSP can be formulated as a linear programming problem as follows\cite{papadimitriou98}:
+	\begin{equation} \label{eq:TSPLinearProgramming}
 	min \sum_{i=1}^{n} \sum_{j=1, j\neq i}^{n} {c_i}_j {x_i}_j
-	\] where ${c_i}_j$ is the cost between cities $i$ and $j$ and ${x_i}_j$ is given by\[
+	\end{equation}
+	where ${c_i}_j$ is the cost between cities $i$ and $j$ and ${x_i}_j$ is given by Eq.(\ref{eq:TSPX})
+	\begin{equation} \label{eq:TSPX}
 	{x_i}_j = 
 	\begin{cases}
-		1,& \text{path goes from i to j}\\
-		0,& \text{otherwise}
+	1,& \text{path goes from i to j}\\
+	0,& \text{otherwise}
 	\end{cases}
-	\]
-	The complexity of TSP, makes room for approximate algorithms to arise\cite{Brucal17}. Such algorithms can reach near optimal solution in a reasonable time as will be seen in this work. Algorithms such as variable neighborhood search\cite{Thanh15}, genetic algorithm\cite{Wang17}, monte-carlo trees search\cite{Perez14}, adaptive bee colony\cite{Rekaby13}, meta-learning\cite{Kanda11}, machine learning\cite{Pihera14}, simulated annealing\cite{Kerrache14}, ant colony optimization\cite{Swiatnicki15}, harmony search\cite{Tongchan17}, biography based approximation\cite{Wu17} and variations of neural networks\cite{Gao10}\cite{Mueller15} have addressed the TSP. In this work we will focus on four of such algorithms, namely: genetic algorithm\cite{Kirk14}\cite{mathwork}, simulated annealing\cite{Jang02}, nearest neighbor search\cite{Jevtic14} and ant colony optimization\cite{Ibrahim15}. This survey will compare {Matlab\texttrademark}  implementation of the four algorithms in terms of runtime performance and how close they are to the optimal solution.
+	\end{equation}
+	The complexity of TSP, makes room for approximate algorithms to arise\cite{Brucal17}. Such algorithms can reach near optimal solution in a reasonable time as seen in this work. Algorithms such as variable neighborhood search\cite{Thanh15}, genetic algorithm\cite{Wang17}, monte-carlo trees search\cite{Perez14}, adaptive bee colony\cite{Rekaby13}, meta-learning\cite{Kanda11}, machine learning\cite{Pihera14}, simulated annealing\cite{Kerrache14}, ant colony optimization\cite{Swiatnicki15}, harmony search\cite{Tongchan17}, biography based approximation\cite{Wu17} and variations of neural networks\cite{Gao10}\cite{Mueller15} have addressed the TSP. In this work we will focus on four of such algorithms, namely: genetic algorithm\cite{Kirk14}\cite{mathwork}, simulated annealing\cite{Jang02}, nearest neighbor search\cite{Jevtic14} and ant colony optimization\cite{Ibrahim15}. This survey will compare {Matlab\texttrademark}  implementation of the four algorithms in terms of runtime performance and how close they are to the optimal solution.
 	
 	\section{Dataset}
 	Datasets for TSP problem contain a wide variety of formats. Cities across a country, VLSI nodes or traveling across the Mona Lisa drawing. But they are all similar in the aspect of the data structure. The structure is a 2-D coordinate point system with euclidean distances as the distance between nodes.
@@ -84,17 +88,19 @@
 	\begin{enumerate}
 		\item Choose random state {\bfseries S} and the starting temperature {\bfseries T} and cooling constant {$\boldsymbol \beta$}.
 		\item Create new state $\boldsymbol{S\prime}$ by randomly swapping {\bfseries M} cities in the current state.
-		\item Compute the change in cost \[
-		\boldsymbol{\gamma = \dfrac{C(S')-C(S)}{C(S)}}
-		\]
+		\item Compute the change in cost using Eq.(\ref{eq:GADelta})
+		\begin{equation} \label{eq:GADelta}
+		\gamma = \dfrac{C(S')-C(S)}{C(S)}
+		\end{equation}
 		\item If {$\boldsymbol{\gamma \leqslant 0}$, then {\bfseries S =} $\boldsymbol{S\prime}$.}
-		\item Else, compute the probability \[
-		\boldsymbol{P(\gamma, T)=}
+		\item Else, compute the probability using Eq.(\ref{eq:GAProb})
+		\begin{equation} \label{eq:GAProb}
+		P(\gamma, T)=
 		\begin{cases}
-		\boldsymbol{1},& \text{if } \boldsymbol{\gamma\leqslant 0}\\
-		\boldsymbol{e^{\frac{-\gamma}{T}}},& \text{otherwise}
+		1,& \text{if } \gamma\leqslant 0\\
+		e^{\frac{-\gamma}{T}},& \text{otherwise}
 		\end{cases} 
-		\]
+		\end{equation}
 		\item Randomly assign {\bfseries S =} $\boldsymbol{S\prime}$ using {$\boldsymbol \gamma$}.
 		\item Repeat steps 2 to 6 until stopping conditions are met; ie, temperature reaches a certain threshold or a required number of iterations is met.
 	\end{enumerate}
