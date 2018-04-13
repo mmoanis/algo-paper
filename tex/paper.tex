@@ -41,7 +41,7 @@
 	\end{itemize}
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[scale=0.3]{./tex/uypoints.jpg}
+		\includegraphics[scale=0.3]{./uypoints.jpg}
 		\caption{XY coordinate representation of Uruguay dataset}
 		\label{fig:uruguay}
 	\end{figure}
@@ -70,31 +70,135 @@
 	It is important to note that the resultant solution is not necessarily the optimal one. Specially, when a limited number of GA iterations is used to reduce the relatively large calculation time to be able to converge to the optimal solution.
 	
 	\subsection{Simulated Annealing}
-	 Simulated annealing (SA) is another algorithm that mimic a natural phenomena; this time it is the heat treatment process used on metals. During the annealing process, a metal is heated enough to allow its molecular structure to be altered. The temperature {\bfseries T} is steadily lowered by a cooling constant {$\boldsymbol \beta$}, which subsequently lowers the energy of the atoms and restricts their arrangement until the metal's structure finally becomes set. That in turn, minimizes the number of defects in the structure of the metal.
+	Simulated annealing (SA) is another algorithm that mimic a natural phenomena; this time it is the heat treatment process used on metals. During the annealing process, a metal is heated enough to allow its molecular structure to be altered. The temperature {\bfseries T} is steadily lowered by a cooling constant {$\boldsymbol \beta$}, which subsequently lowers the energy of the atoms and restricts their arrangement until the metal's structure finally becomes set. That in turn, minimizes the number of defects in the structure of the metal.
 	 
-	 SA can be considered as a modification for greedy search as an attempt to reach an optimal solution rather than getting stuck at a local optimum. For example, consider a problem of searching a function with the goal of reaching the global optimum. A greedy approach would move in the direction that result in a higher gain and stops once no more moves would lead to a higher gain, thus, a greedy approach can miss the global optimal solution.
+	SA can be considered as a modification for greedy search as an attempt to reach an optimal solution rather than getting stuck at a local optimum. For example, consider a problem of searching a function with the goal of reaching the global optimum. A greedy approach would move in the direction that result in a higher gain and stops once no more moves would lead to a higher gain, thus, a greedy approach can miss the global optimal solution.
 	 
-	 In contrast to greedy approach, SA occasionally allows moves in directions with lower gain that would not have been accessible otherwise. SA starts at random solution -a state {\bfseries S}- and then at each iteration step, the solution is slightly modified in order to choose another search point and move to a new state $\boldsymbol{S\prime}$. This modification is made with a random reorder of a constant number of elements in the solution space {\bfseries M}. The selection process of the new state -solution- considers the change in cost {\bfseries C} - know as {$\boldsymbol \gamma$}- that will be incurred if the new state is chosen. When the cost is going to be lower, the new state is chosen. Else, however, the incurred cost might increase there is still a chance to accept this state with a probability \\{\bfseries P({$\boldsymbol \gamma$}, T)} that is relative to the current temperature of the simulation; that's it, when the current temperature is high, the probability to take worse solutions will be higher as there still more simulation time available to try different search point in order to reach the global optimum.
+	In contrast to greedy approach, SA occasionally allows moves in directions with lower gain that would not have been accessible otherwise. SA starts at random solution -a state {\bfseries S}- and then at each iteration step, the solution is slightly modified in order to choose another search point and move to a new state $\boldsymbol{S\prime}$. This modification is made with a random reorder of a constant number of elements in the solution space {\bfseries M}. The selection process of the new state -solution- considers the change in cost {\bfseries C} - know as {$\boldsymbol \gamma$}- that will be incurred if the new state is chosen. When the cost is going to be lower, the new state is chosen. Else, however, the incurred cost might increase there is still a chance to accept this state with a probability \\{\bfseries P({$\boldsymbol \gamma$}, T)} that is relative to the current temperature of the simulation; that's it, when the current temperature is high, the probability to take worse solutions will be higher as there still more simulation time available to try different search point in order to reach the global optimum.
 	 
-	 In the context of TSP, each state in SA algorithm is a route between the towns and cities. The cost measured for each route is the distance  between its points and accordingly the optimal solution is that with the minimum distance. SA algorithm would then work in the following steps:
-	 \begin{enumerate}
-	 	\item Choose random state {\bfseries S} and the starting temperature {\bfseries T} and cooling constant {$\boldsymbol \beta$}.
-	 	\item Create new state $\boldsymbol{S\prime}$ by randomly swapping {\bfseries M} cities in the current state.
-	 	\item Compute the change in cost \[
-	 	\boldsymbol{\gamma = \dfrac{C(S')-C(S)}{C(S)}}
-	 	\]
-	 	\item If {$\boldsymbol{\gamma \leqslant 0}$, then {\bfseries S =} $\boldsymbol{S\prime}$.}
-	 	\item Else, compute the probability \[
-	 	\boldsymbol{P(\gamma, T)=}
-	 	\begin{cases}
-	 	\boldsymbol{1},& \text{if } \boldsymbol{\gamma\leqslant 0}\\
-	 	\boldsymbol{e^{\frac{-\gamma}{T}}},& \text{otherwise}
-	 	\end{cases} 
-	 	\]
-	 	\item Randomly assign {\bfseries S =} $\boldsymbol{S\prime}$ using {$\boldsymbol \gamma$}.
-	 	\item Repeat steps 2 to 6 until stopping conditions are met; ie, temperature reaches a certain threshold or a required number of iterations is met.
-	 \end{enumerate}
-	 Finally, the performance of SA can be controlled by the choice of the initial temperature, cooling constant and the number of cities modified in each step. Additionally, the stopping conditions are of quite importance for SA to reach a near optimal solution. If the algorithm is stopped too soon, the approximation will not be as close to the global optimum. And if the algorithm is not stopped soon enough, more time will be wasted on calculations and search steps with little to no gain.
+	In the context of TSP, each state in SA algorithm is a route between the towns and cities. The cost measured for each route is the distance  between its points and accordingly the optimal solution is that with the minimum distance. SA algorithm would then work in the following steps:
+	\begin{enumerate}
+		\item Choose random state {\bfseries S} and the starting temperature {\bfseries T} and cooling constant {$\boldsymbol \beta$}.
+		\item Create new state $\boldsymbol{S\prime}$ by randomly swapping {\bfseries M} cities in the current state.
+		\item Compute the change in cost \[
+		\boldsymbol{\gamma = \dfrac{C(S')-C(S)}{C(S)}}
+		\]
+		\item If {$\boldsymbol{\gamma \leqslant 0}$, then {\bfseries S =} $\boldsymbol{S\prime}$.}
+		\item Else, compute the probability \[
+		\boldsymbol{P(\gamma, T)=}
+		\begin{cases}
+		\boldsymbol{1},& \text{if } \boldsymbol{\gamma\leqslant 0}\\
+		\boldsymbol{e^{\frac{-\gamma}{T}}},& \text{otherwise}
+		\end{cases} 
+		\]
+		\item Randomly assign {\bfseries S =} $\boldsymbol{S\prime}$ using {$\boldsymbol \gamma$}.
+		\item Repeat steps 2 to 6 until stopping conditions are met; ie, temperature reaches a certain threshold or a required number of iterations is met.
+	\end{enumerate}
+	Finally, the performance of SA can be controlled by the choice of the initial temperature, cooling constant and the number of cities modified in each step. Additionally, the stopping conditions are of quite importance for SA to reach a near optimal solution. If the algorithm is stopped too soon, the approximation will not be as close to the global optimum. And if the algorithm is not stopped soon enough, more time will be wasted on calculations and search steps with little to no gain.
+
+	\subsection{Nearest Neighbor (NN)}
+	Nearest neighbor approach is one of the simplest algorithms in combinatorial optimization problems and also one of the fastest running algorithms.
+	
+	The algorithm implementation for solving the TSP problem is as follows:
+	\begin{enumerate}
+		\item Select a random city as the current city
+		\item For all cities
+		\item Select the closest unvisited city to the current one
+		\item Mark current city as visited
+		\item Visit the new selected city
+		\item If all cities are visited then terminate
+		\item O.W. go back to step 3
+	\end{enumerate}
+	
+	The NN approach is greedy in nature, usually resulting in a non optimal solution. It can miss shorter routes that might be noticed with human sight. Based on the distribution of cities, the NN approach may provide the optimal solution.
+	
+	\subsection{Ant Colony Optimization (ACO)}
+	The Ant Colony Optimization (ACO) algorithms tries to mimic the natural phenomenon of ants finding a path from a food source to the colony. Ants start first going at random paths in the paths, leaving trails of a chemical substance called pheromone behind. Pheromone evaporates with time, therefore shorter paths tend have heavier trails of pheromone as they are marched more frequently thus attracting more ants to this path. Since pheromone evaporates this provides an advantage of avoiding the convergence to a local minimum path. In other words, if pheromone did evaporate at all, the paths chosen by the first ants would still attract the following ants.
+	
+	For better understanding of the ACO algorithms, an example from \textbf{[\underline{link}]} is illustrated. As shown in Fig.  \ref{fig:ACOexample} a, the system is shown with the initial start points A as the food source ,and E as the colony nest, and the distances of the paths. At t=0, 30 ants start moving from both E and A simultaneously. The ants currently can see no preference between the different paths because there are no traces of pheromone left behind, therefore, the ants divide randomly with equal probability going in to both points H and C, i.e. 15 ants are going from D to C and 15 ants from D to H, and similarly from point B to both C and H. At t=1, the 30 new ants coming from B, find 2 unequal paths, the path going to H has a trail of 15 from the ants that went to H from B, while the path going to C has a trail of 30 that can be divided into:
+	\begin{enumerate}
+		\item The trail from ants going from point B.
+		\item The trail from ants coming from point D.
+	\end{enumerate}
+	 Resulting in a bias in the probability of choosing the path unlike the previous step. The number of ants going to C is expected to be double the number of ants going to H. The same is true for the 30 new ants coming from D.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.7]{./ACOexample.jpg}
+		\caption{ACO example \textbf{[\underline{link}]} (a)The initial description of the problem showing distances. (b)At time t=0 no trail is found on the graph therefore ants choose the paths with equal probability. (c)Trails from previous step are found and therefore the choice of paths is biased towards the shorter edges.}
+		\label{fig:ACOexample}
+	\end{figure}
+	
+	In combinatorial problems, we deal with simulated virtual ants. These virtual ants differ than the real world ants in two aspects.
+	\begin{enumerate}
+		\item Artificial ants have a prior knowledge of the distances between cities and therefore tend to select the shorter distance.
+		\item Artificial ants have memory, they know which cities they have visited along a path and will not select those cities again.
+	\end{enumerate}
+	We can express the probability of ant \textit{k} selecting city \textit{j} after city \textit{i} as follows:
+	
+	\begin{equation} \label{eq:ACOprobability}
+		\textit{p}^\textit{k}_\textit{ij} = 
+	\begin{cases}
+	{\dfrac{[\tau_{ij}]^\alpha \textbf{.} [\eta_{ij}]^\beta}
+		{\sum_{s \in allowed_k} [\tau_{is}]^\alpha \textbf{.} [\eta_{is}]^\beta}  } ,& \text{if } \textit{j} \in \textit{allowed}_k
+	\\
+	0,& \text{otherwise}
+	\end{cases}
+	\end{equation}
+	where:
+	\begin{itemize}
+		\renewcommand{\labelitemi}{-}
+		\item $\textit{p}^\textit{k}_\textit{ij}$ is the probability that city \textit{j} will be selected after city \textit{i} by ant \textit{k}.
+		\item $\tau_{is}$ is the intensity of pheromone between cities \textit{i} and \textit{j}.
+		\item $\alpha$ is the parameter to regulate the influence of trails of pheromone.
+		\item $\eta$ is the visibility of city \textit{j} from city \textit{i} which is always measured as $\dfrac{1}{\text{distance between cities \textit{i} and \textit{j}}}$.
+		\item $\beta$ is the parameter to regulate the influence of $\eta_{ij}$
+		\item allowed$_k$ is the set of unvisited cities.
+	\end{itemize}
+
+	At the beginning of the algorithm, \textit{N} ants are assigned initial starting points (cities) at random. As the iterations proceed, ants decide which cities to visit according to $\textit{p}_\textit{ij}$ described in Eq. (\ref{eq:ACOprobability}). After \textit{n} iterations, each ant completes a tour. Tours with shorter distances, have stronger pheromone trails. Therefore updating the trails follow \textit{Q}/\textit{L}$_\textit{k}$ where \textit{Q} is a constant value and \textit{L}$_\textit{k}$ is the path length. Also as we mentioned before the pheromone trails evaporate with time. Therefore we can update $\tau_{is}$ according to the following equations:
+	
+	\begin{equation} \label{eq:ACOTrailUpdate1}
+		\tau_{ij}(t+1) = \rho \textbf{.} \tau_{ij}(t) + \Delta\tau_{ij}
+	\end{equation}
+	
+	\begin{equation} \label{eq:ACOTrailUpdate2}
+		\Delta\tau_{ij} = \sum_{k=1}^l \Delta\tau_{ij}^k
+	\end{equation}
+	
+	\begin{equation} \label{eq:ACOTrailUpdate3}
+	\Delta\tau_{ij}^k = 
+	\begin{cases}
+	\textit{Q}/\textit{L}_\textit{k},& \text{if ant k travels the path (\textit{i}, \textit{j})}
+	\\
+	0,& \text{otherwise}
+	\end{cases}
+	\end{equation}
+	
+	where:
+	\begin{itemize}
+		\renewcommand{\labelitemi}{-}
+		\item \textit{t} is the iteration counter.
+		\item $\rho$ $\in$ [0,1] the parameter to regulate the reduction of $\tau_{ij}$.
+		\item $\Delta\tau_{ij}$ is the total increase of pheromone trail on the edge (\textit{i},\textit{j})
+		\item $\Delta\tau_{ij}^k$ is the increase of pheromone trail caused by ant \textit{k}.
+	\end{itemize}	
+	The algorithm to solve TSP with ACO is as follows:
+	
+	\begin{itemize}
+		\item For i=1 to iteration number
+		\begin{itemize}
+		\item For k=1 to number of ants
+			\begin{itemize}
+			\item While no complete tour is found by ant k
+				\begin{itemize}
+				\item Select city j to be visited according to Eq.(\ref{eq:ACOprobability})
+				\end{itemize}
+			\item Calculate L$_k$
+			\end{itemize}
+		\item Update pheromone trail levels according to Eqs.(\ref{eq:ACOTrailUpdate1},\ref{eq:ACOTrailUpdate2},\ref{eq:ACOTrailUpdate3}).
+		\end{itemize}
+	\end{itemize}
+	
 	\section{Results}
 	
 	
@@ -130,6 +234,7 @@
 	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
 	
 	Aliquam tempor pulvinar sem, sed porta est mollis id. Morbi accumsan felis ipsum, id interdum metus consectetur sit amet. Cras rhoncus luctus ligula, vitae sagittis nibh ornare et. Sed a fermentum nisi. Ut non nulla eu ligula mattis semper. Nulla facilisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+	\section{References}
 \end{document}
 
 
