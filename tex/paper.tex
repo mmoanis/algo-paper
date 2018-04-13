@@ -211,18 +211,11 @@
 	The ant colony tests resulted in running times between 777.8 seconds and 790 seconds on Octave and between 11.7 seconds and 16.8 seconds on Matlab. The algorithm default parameters used runs the algorithm for 10 iterations and the shortest path length found was of length 951387 and that is 91.5\% within the optimal solution. A run for 100 iterations was conducted. This took 130 seconds to complete and provided a path of length 880279, 91\% within the optimal solution and 0.5\% better than the previous run.
 	
 	\section{Conclusion}
+	In this study, we have provided a comparative analysis between the four algorithms -GA, SA, NN, and ACO- for solving the TSP using free {Matlab\texttrademark} implementations. The analysis was focused on measuring the runtime performance and how close is the solution from the known optimal solution of the the Uruguay dataset of 734 unique points. Furthermore, the experiments were run on both {Matlab\texttrademark} and {Octave\texttrademark} software to highlight the differences between the two in terms of performance.
 	
+	Within the considered algorithms, SA managed to produce the most optimal solution at a $11.34\%$ of the optimal solution, however, it was one of the slowest implementations. The NN algorthim, although a simple algorithm, it produced the second most optimal solution only at $18\%$ from the global optimum and interestingly with the fastest runtime between all the other algorithms. On the contrary, ACO proved to be the least correct algorithm with $91.5\%$ from the global optimum.
 	
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum, urna nec luctus tincidunt, nisi augue vehicula nulla, sit amet sollicitudin nisi nibh eget diam. Vivamus maximus tortor dolor, non porttitor urna vestibulum eu. Nullam maximus in massa eu lacinia. Curabitur ac risus ac elit euismod placerat quis eu odio. Sed ante ex, congue sit amet enim et, aliquam egestas turpis. Cras purus ex, viverra sit amet augue id, tempus ultricies risus. Aenean eget vestibulum orci. Ut enim nisi, tempor id urna et, dignissim ornare lectus. Nunc lobortis risus neque, a fermentum ante consequat ac. Fusce mollis pretium pellentesque. Vestibulum fermentum ornare elementum. Nam rutrum sem ut est mollis consequat. Morbi at faucibus mi. In ultricies justo non lorem varius, non tristique ante suscipit. Curabitur eget diam tincidunt, venenatis enim sagittis, malesuada magna. Nullam in urna a odio finibus tristique.
-	
-	Morbi odio enim, pharetra in tempor in, laoreet eu erat. Integer ac mi posuere, egestas justo ac, varius mauris. Nullam ornare lacus a massa posuere efficitur. Integer non ligula mattis, imperdiet tortor eget, accumsan nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed arcu mi, interdum pretium mauris non, condimentum accumsan elit. Sed ut pulvinar orci. Fusce elementum mi tellus, a fringilla odio tincidunt viverra. Vestibulum erat lorem, vehicula id porttitor sed, varius id nibh. Morbi vel ex nec tortor ultricies facilisis.
-	
-	Aliquam erat volutpat. Vestibulum eleifend dolor ac nulla maximus, vitae aliquet neque laoreet. Nam vestibulum sem sit amet eros molestie, id pulvinar lectus sollicitudin. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas sed ipsum ex. Maecenas a odio id risus lacinia varius sed vel ex. Etiam finibus efficitur magna, vitae scelerisque velit pharetra sit amet. Phasellus ac sapien in odio posuere tincidunt. Fusce viverra, erat nec tincidunt cursus, magna nulla vulputate nisi, eget volutpat massa nibh in lectus. Mauris nec laoreet lacus. Ut luctus metus a suscipit gravida. Sed placerat purus nulla, ac mattis sem malesuada nec. Nunc et aliquet dolor. Aliquam tincidunt aliquet mi vel hendrerit. Nunc posuere tempus ante, non feugiat ligula vehicula vel. Nunc vitae rhoncus urna.
-	
-	Duis porttitor risus id enim fermentum, sed facilisis lacus placerat. Pellentesque ultricies felis vel enim imperdiet, vel dictum lectus porttitor. Etiam maximus dignissim est, non pretium nunc suscipit quis. Aliquam posuere et leo sit amet porttitor. Mauris rhoncus tellus vitae lorem venenatis efficitur. Quisque ut pretium velit. Vivamus luctus dapibus tincidunt. Aenean volutpat semper purus, sed vestibulum leo imperdiet ac. Sed turpis ex, volutpat sit amet ipsum quis, dapibus volutpat ante.
-	
-	Aliquam tempor pulvinar sem, sed porta est mollis id. Morbi accumsan felis ipsum, id interdum metus consectetur sit amet. Cras rhoncus luctus ligula, vitae sagittis nibh ornare et. Sed a fermentum nisi. Ut non nulla eu ligula mattis semper. Nulla facilisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
+	Additionally, the difference between the runtime performance of the four algorithms when run on both {Matlab\texttrademark} and {Octave\texttrademark} was found to be very huge; for example in the case of GA, {Matlab\texttrademark} was 380x faster. This can draw a conclusion that the current state of {Matlab\texttrademark} software far exceeds it's free open source alternative {Octave\texttrademark}.
 	\begin{thebibliography}{999}
 		\bibitem{applegate07}
 		Applegate, D. L., Bixby, R. E., Chvatal, V.,  and Cook, W. J., (2007).
@@ -317,16 +310,13 @@
 			problem}. [Accessed: 12-April-2018]
 		\bibitem{Ibrahim15}
 		Ibrahim, S.
-		\emph{Ant Colony Optimization (ACO) to solve traveling salesman problem (TSP)}, 2015. [Online]. Available: \url{https://www.mathworks.com/matlabcentral/fileexchange/51113-
-			ant-colony-optimization--aco--to-solve-traveling-salesman-
-			problem--tsp-?focused=3878286&tab=function}. [Accessed: 12-April-2018]
+		\emph{Ant Colony Optimization (ACO) to solve traveling salesman problem (TSP)}, 2015. [Online]. Available: \url{https://www.mathworks.com/matlabcentral/fileexchange/51113-ant-colony-
+			optimization-aco--to-solve-traveling-
+			salesman-problem--tsp-?focused=3878286&tab=function}. [Accessed: 12-April-2018]
 		\bibitem{UY734}
 		Cock, W. \emph{Uruguay TSP dataset UY734}. [Online]
 		\url{http://www.math.uwaterloo.ca/tsp/world/uypoints.html}. [Accessed: 12-April-2018]
-		
-		
 	\end{thebibliography}
->>>>>>> b947106f86dab8a81a7da37af7b46c64680ec223
 \end{document}
 
 
