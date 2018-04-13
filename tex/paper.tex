@@ -39,11 +39,11 @@
 	0,& \text{otherwise}
 	\end{cases}
 	\end{equation}
-	The complexity of TSP, makes room for approximate algorithms to arise\cite{Brucal17}. Such algorithms can reach near optimal solution in a reasonable time as seen in this work. Algorithms such as variable neighborhood search\cite{Thanh15}, genetic algorithm\cite{Wang17}, monte-carlo trees search\cite{Perez14}, adaptive bee colony\cite{Rekaby13}, meta-learning\cite{Kanda11}, machine learning\cite{Pihera14}, simulated annealing\cite{Kerrache14}, ant colony optimization\cite{Swiatnicki15}, harmony search\cite{Tongchan17}, biography based approximation\cite{Wu17} and variations of neural networks\cite{Gao10}\cite{Mueller15} have addressed the TSP. In this work we will focus on four of such algorithms, namely: genetic algorithm\cite{Kirk14}\cite{mathwork}, simulated annealing\cite{Jang02}, nearest neighbor search\cite{Jevtic14} and ant colony optimization\cite{Ibrahim15}. This survey will compare {Matlab\texttrademark}  implementation of the four algorithms in terms of runtime performance and how close they are to the optimal solution.
+	The complexity of TSP makes room for approximate algorithms to arise\cite{Brucal17}. Such algorithms can reach near optimal solution in a reasonable time as seen in this work. Algorithms such as variable neighborhood search\cite{Thanh15}, genetic algorithm\cite{Wang17}, monte-carlo trees search\cite{Perez14}, adaptive bee colony\cite{Rekaby13}, meta-learning\cite{Kanda11}, machine learning\cite{Pihera14}, simulated annealing\cite{Kerrache14}, ant colony optimization\cite{Swiatnicki15}, harmony search\cite{Tongchan17}, biography based approximation\cite{Wu17} and variations of neural networks\cite{Gao10}\cite{Mueller15} have addressed the TSP. In this work we will focus on four of such algorithms, namely: genetic algorithm\cite{Kirk14}\cite{mathwork}, simulated annealing\cite{Jang02}, nearest neighbor search\cite{Jevtic14} and ant colony optimization\cite{Ibrahim15}. This survey will compare {Matlab\texttrademark}  implementation of the four algorithms in terms of runtime performance and how close they are to the optimal solution.
 	
 	\section{Dataset}
 	Datasets for TSP problem contain a wide variety of formats. Cities across a country, VLSI nodes or traveling across the Mona Lisa drawing. But they are all similar in the aspect of the data structure. The structure is a 2-D coordinate point system with euclidean distances as the distance between nodes.
-	For our work we selected the Uruguay dataset from the national dataset collection\cite{UY734} to be used to assess the four algorithms in this survey in terms of runtime performance and how close is their solutions compared to the dataset know optimal solution. Uruguay dataset is characterized by 
+	For our work we selected the Uruguay dataset from the national dataset collection\cite{UY734} to be used to assess the four algorithms in this survey in terms of runtime performance and how close are their solutions compared to the dataset know optimal solution. Uruguay dataset is characterized by 
 	\begin{itemize}
 		\item 734 unique points (no duplicates)
 		\item Optimal tour of length 79114
@@ -57,7 +57,7 @@
 	A graphical representation of the coordinates of the dataset is shown in figure \ref{fig:uruguay}
 	
 	\section{Algorithms}
-	In this section, the four algorithms are considered with a brief description of how they solve the TSP problem.
+	In this section, the four algorithms are considered with a brief description of how they solve TSP.
 	\subsection{Genetic Algorithm}
 	
 	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem.
@@ -300,7 +300,7 @@
 		pp. 142-149
 		\bibitem{Wang17}
 		Wang, X., Pengcheng, Li, Wang Lin, Wang Lei, (2017).
-		\emph{A Nobel Genetic Algorithm Based on Circles for Larger-Scale Traveling Salesman Problem}. 2017 International Conference on Robotics and Automation Sciences (ICRAS).
+		\emph{A Novel Genetic Algorithm Based on Circles for Larger-Scale Traveling Salesman Problem}. 2017 International Conference on Robotics and Automation Sciences (ICRAS).
 		\bibitem{Perez14}
 		Perez, D., Powley, E., Whitehouse, D., Rohlfshagen, P., Samothrakis, S., Cowling, P. Lucas, S. (2014).
 		\emph{Solving the Physical Traveling Salesman Problem Using Tree Search and Macro Actions}. IEEE Transaction on Computational Intelligence and AI in Games, Vol 6. No. 1, March 2014,
