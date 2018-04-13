@@ -124,7 +124,7 @@
 	The NN approach is greedy in nature, usually resulting in a non optimal solution. It can miss shorter routes that might be noticed with human sight. Based on the distribution of cities, the NN approach may provide the optimal solution.
 	
 	\subsection{Ant Colony Optimization (ACO)}
-	The Ant Colony Optimization (ACO) algorithms tries to mimic the natural phenomenon of ants finding a path from a food source to the colony. Ants start first going at random paths in the paths, leaving trails of a chemical substance called pheromone behind. Pheromone evaporates with time, therefore shorter paths tend have heavier trails of pheromone as they are marched more frequently thus attracting more ants to this path. Since pheromone evaporates this provides an advantage of avoiding the convergence to a local minimum path. In other words, if pheromone did evaporate at all, the paths chosen by the first ants would still attract the following ants.
+	The Ant Colony Optimization (ACO) algorithms tries to mimic the natural phenomenon of ants finding a path from a food source to the colony. Ants start first going at random paths, leaving trails of a chemical substance called pheromone behind. Pheromone evaporates with time, therefore shorter paths tend have heavier trails of pheromone as they are marched more frequently thus attracting more ants to this path. Since pheromone evaporates this provides an advantage of avoiding the convergence to a local minimum path. In other words, if pheromone did not evaporate at all, the paths chosen by the first ants would still attract the following ants.
 	
 	\begin{figure}[h!]
 		\centering
@@ -160,14 +160,14 @@
 	\begin{itemize}
 		\renewcommand{\labelitemi}{-}
 		\item $\textit{p}^\textit{k}_\textit{ij}$ is the probability that city \textit{j} will be selected after city \textit{i} by ant \textit{k}.
-		\item $\tau_{is}$ is the intensity of pheromone between cities \textit{i} and \textit{j}.
+		\item $\tau_{ij}$ is the intensity of pheromone between cities \textit{i} and \textit{j}.
 		\item $\alpha$ is the parameter to regulate the influence of trails of pheromone.
 		\item $\eta$ is the visibility of city \textit{j} from city \textit{i} which is always measured as $\dfrac{1}{\text{distance between cities \textit{i} and \textit{j}}}$.
 		\item $\beta$ is the parameter to regulate the influence of $\eta_{ij}$
 		\item allowed$_k$ is the set of unvisited cities.
 	\end{itemize}
 
-	At the beginning of the algorithm, \textit{N} ants are assigned initial starting points (cities) at random. As the iterations proceed, ants decide which cities to visit according to $\textit{p}_\textit{ij}$ described in Eq. (\ref{eq:ACOprobability}). After \textit{n} iterations, each ant completes a tour. Tours with shorter distances, have stronger pheromone trails. Therefore updating the trails follow \textit{Q}/\textit{L}$_\textit{k}$ where \textit{Q} is a constant value and \textit{L}$_\textit{k}$ is the path length. Also as we mentioned before the pheromone trails evaporate with time. Therefore we can update $\tau_{is}$ according to the following equations:
+	At the beginning of the algorithm, \textit{N} ants are assigned initial starting points (cities) at random. As the iterations proceed, ants decide which cities to visit according to $\textit{p}_\textit{ij}$ described in Eq. (\ref{eq:ACOprobability}). After \textit{n} iterations, each ant completes a tour. Tours with shorter distances, have stronger pheromone trails. Therefore updating the trails follow \textit{Q}/\textit{L}$_\textit{k}$ where \textit{Q} is a constant value and \textit{L}$_\textit{k}$ is the path length. Also as we mentioned before the pheromone trails evaporate with time. Therefore we can update $\tau_{ij}$ according to the following equations:
 	
 	\begin{equation} \label{eq:ACOTrailUpdate1}
 		\tau_{ij}(t+1) = \rho \textbf{.} \tau_{ij}(t) + \Delta\tau_{ij}
