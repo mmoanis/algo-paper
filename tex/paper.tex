@@ -60,17 +60,17 @@
 	In this section, the four algorithms are considered with a brief description of how they solve TSP.
 	\subsection{Genetic Algorithm}
 	
-	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem.
+	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem\cite{Wang17}.
 	
-	Genetic algorithm formulates a problem using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each individual solution is called individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
+	Genetic algorithm formulates a problem using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each solution is called an individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
 	
 	TSP can be easily formulated in GA context. The search space is the set of routes that spans all the cities of Uruguay, and the goal is to find a route with the minimum cost. Each route is considered as an individual with a DNA that resembles the ordered set of towns and cities in the route -genes. The mutation and crossover of individuals is the process of reordering genes in an individual's DNA to produce new individuals. The solution for TSP will be an individual with DNA representing the optimal route between towns and cities that have the minimal distance cost.
 	
 	The iterative process for solving TSP using GA is given by the following steps:
 	\begin{enumerate}
-		\item Create an initial population of size (N=100).
+		\item Create an initial population of size {\bfseries N}.
 		\item Evaluate the fitness of each individual in the population.
-		\item Select (M=4) individuals from the current population using their fitness score as a criterion.
+		\item Select {\bfseries M} individuals from the current population using their fitness score as a criterion.
 		\item Mutate selected individuals and create 3 new routes.
 		\item Repeat steps 3 and 4 until all the individuals are mutated.
 		\item Replace the old population with the new mutated one.
