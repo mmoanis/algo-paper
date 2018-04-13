@@ -22,7 +22,9 @@
 	
 	\section{Introduction}
 	The traveling salesman problem (TSP) is a classical combinatorial optimization problem with a long history -dating back to 1832, and countless number of real life applications\cite{applegate07}\cite{punnen07}. It was first mentioned in a handbook for traveling salesmen in Germany and Switzerland to be mathematically formulated later in 1930. Though easy to describe, TSP is a NP-hard problem; that's it, there is no polynomial time algorithm to solve it. This limits the use of exact methods which have a time complexity of $O(n!)$ to a small number of cities.
+	
 	The problem is to find the shortest route between a given set of cities' locations where each city must be visited only once and the trip must end by returning back to the starting city. TSP can be modeled as an undirected weighted graph, such that cities are the graph's vertices and paths between cities are the graph's edges. The distance between two given cities in both direction can be the same which is called symmetric TSP and can differ in case of asymmetric variant. In this work, we will only consider the symmetric TSP.
+	
 	The optimization problem to solve TSP can be formulated as a linear programming problem as follows\cite{papadimitriou98} \[
 	min \sum_{i=1}^{n} \sum_{j=1, j\neq i}^{n} {c_i}_j {x_i}_j
 	\] where ${c_i}_j$ is the cost between cities $i$ and $j$ and ${x_i}_j$ is given by\[
