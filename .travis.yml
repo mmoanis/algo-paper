@@ -6,4 +6,4 @@ before_install:
 
 script:
     - cd ./tex
-    - pdflatex -interaction=nonstopmode -halt-on-error tex/paper.tex
+    - pdflatex -interaction=nonstopmode -halt-on-error paper.tex
