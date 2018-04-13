@@ -11,10 +11,10 @@
 	\twocolumn[
 	\begin{@twocolumnfalse}
 		\author{Mohamed Moanis Ali, Michael Sedrak \\  mohamed.moanis.ali@gmail.com, m.sedrak@live.com}
-		\title{Solving TSP With Genetic Algorithms}
+		\title{Comparative Analysis of Approximation Algorithms for Solving TSP}
 		\maketitle
 		\begin{abstract}
-			The traveling salesman problem is considered one of hardest problems in computer science with no polynomial runtime algorithm to solve it so far. Nevertheless, TSP is an active research point with more algorithms being developed to either approximately solve the original problem, or to speed it up so larger datasets can be solved. In this work we present a comparative study using four algorithms to solve TSP -genetic algorithm, simulated annealing, nearest neighbor and ant colony optimization to analyze the runtime performance and the correctness of their solution.  The results of the experiments on the Uruguay dataset -using both {Matlab\texttrademark}  and {Octave\texttrademark}- showed that the nearest neighbor algorithm provided the fastest runtime and a relatively correct solution with $18\%$ from the known optimal solution, while the ant colony optimization proved to be the least correct among the studied algorithms. The study also found a huge performance difference between {Matlab\texttrademark}  and {Octave\texttrademark} software.
+			The traveling salesman problem is considered one of hardest problems in computer science with no polynomial runtime algorithm to solve it so far. Nevertheless, TSP is an active research point with more algorithms being developed to either approximately solve the original problem, or to speed it up so larger datasets can be solved. In this work we present a comparative study using four algorithms to solve TSP -genetic algorithm, simulated annealing, nearest neighbor and ant colony optimization to analyze the runtime performance and the correctness of their solution.  The results of the experiments on the Uruguay dataset -using both {Matlab\texttrademark}  and Octave- showed that the nearest neighbor algorithm provided the fastest runtime and a relatively correct solution with $18\%$ from the known optimal solution, while the ant colony optimization proved to be the least correct among the studied algorithms. The study also found a huge performance difference between {Matlab\texttrademark}  and Octave software.
 		\end{abstract}
 		
 	\end{@twocolumnfalse}
@@ -39,11 +39,11 @@
 	0,& \text{otherwise}
 	\end{cases}
 	\end{equation}
-	The complexity of TSP, makes room for approximate algorithms to arise\cite{Brucal17}. Such algorithms can reach near optimal solution in a reasonable time as seen in this work. Algorithms such as variable neighborhood search\cite{Thanh15}, genetic algorithm\cite{Wang17}, monte-carlo trees search\cite{Perez14}, adaptive bee colony\cite{Rekaby13}, meta-learning\cite{Kanda11}, machine learning\cite{Pihera14}, simulated annealing\cite{Kerrache14}, ant colony optimization\cite{Swiatnicki15}, harmony search\cite{Tongchan17}, biography based approximation\cite{Wu17} and variations of neural networks\cite{Gao10}\cite{Mueller15} have addressed the TSP. In this work we will focus on four of such algorithms, namely: genetic algorithm\cite{Kirk14}\cite{mathwork}, simulated annealing\cite{Jang02}, nearest neighbor search\cite{Jevtic14} and ant colony optimization\cite{Ibrahim15}. This survey will compare {Matlab\texttrademark}  implementation of the four algorithms in terms of runtime performance and how close they are to the optimal solution.
+	The complexity of TSP makes room for approximate algorithms to arise\cite{Brucal17}. Such algorithms can reach near optimal solution in a reasonable time as seen in this work. Algorithms such as variable neighborhood search\cite{Thanh15}, genetic algorithm\cite{Wang17}, monte-carlo trees search\cite{Perez14}, adaptive bee colony\cite{Rekaby13}, meta-learning\cite{Kanda11}, machine learning\cite{Pihera14}, simulated annealing\cite{Kerrache14}, ant colony optimization\cite{Swiatnicki15}, harmony search\cite{Tongchan17}, biography based approximation\cite{Wu17} and variations of neural networks\cite{Gao10}\cite{Mueller15} have addressed the TSP. In this work we will focus on four of such algorithms, namely: genetic algorithm\cite{Kirk14}\cite{mathwork}, simulated annealing\cite{Jang02}, nearest neighbor search\cite{Jevtic14} and ant colony optimization\cite{Ibrahim15}. This survey will compare {Matlab\texttrademark}  implementation of the four algorithms in terms of runtime performance and how close they are to the optimal solution.
 	
 	\section{Dataset}
 	Datasets for TSP problem contain a wide variety of formats. Cities across a country, VLSI nodes or traveling across the Mona Lisa drawing. But they are all similar in the aspect of the data structure. The structure is a 2-D coordinate point system with euclidean distances as the distance between nodes.
-	For our work we selected the Uruguay dataset from the national dataset collection\cite{UY734} to be used to assess the four algorithms in this survey in terms of runtime performance and how close is their solutions compared to the dataset know optimal solution. Uruguay dataset is characterized by 
+	For our work we selected the Uruguay dataset from the national dataset collection\cite{UY734} to be used to assess the four algorithms in this survey in terms of runtime performance and how close are their solutions compared to the dataset know optimal solution. Uruguay dataset is characterized by 
 	\begin{itemize}
 		\item 734 unique points (no duplicates)
 		\item Optimal tour of length 79114
@@ -57,20 +57,20 @@
 	A graphical representation of the coordinates of the dataset is shown in figure \ref{fig:uruguay}
 	
 	\section{Algorithms}
-	In this section, the four algorithms are considered with a brief description of how they solve the TSP problem.
+	In this section, the four algorithms are considered with a brief description of how they solve TSP.
 	\subsection{Genetic Algorithm}
 	
-	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem.
+	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem\cite{Wang17}.
 	
-	Genetic algorithm formulates a problem using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each individual solution is called individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
+	Genetic algorithm formulates a problem using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each solution is called an individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
 	
 	TSP can be easily formulated in GA context. The search space is the set of routes that spans all the cities of Uruguay, and the goal is to find a route with the minimum cost. Each route is considered as an individual with a DNA that resembles the ordered set of towns and cities in the route -genes. The mutation and crossover of individuals is the process of reordering genes in an individual's DNA to produce new individuals. The solution for TSP will be an individual with DNA representing the optimal route between towns and cities that have the minimal distance cost.
 	
 	The iterative process for solving TSP using GA is given by the following steps:
 	\begin{enumerate}
-		\item Create an initial population of size (N=100).
+		\item Create an initial population of size {\bfseries N}.
 		\item Evaluate the fitness of each individual in the population.
-		\item Select (M=4) individuals from the current population using their fitness score as a criterion.
+		\item Select {\bfseries M} individuals from the current population using their fitness score as a criterion.
 		\item Mutate selected individuals and create 3 new routes.
 		\item Repeat steps 3 and 4 until all the individuals are mutated.
 		\item Replace the old population with the new mutated one.
@@ -124,7 +124,7 @@
 	The NN approach is greedy in nature, usually resulting in a non optimal solution. It can miss shorter routes that might be noticed with human sight. Based on the distribution of cities, the NN approach may provide the optimal solution.
 	
 	\subsection{Ant Colony Optimization (ACO)}
-	The Ant Colony Optimization (ACO) algorithms tries to mimic the natural phenomenon of ants finding a path from a food source to the colony. Ants start first going at random paths in the paths, leaving trails of a chemical substance called pheromone behind. Pheromone evaporates with time, therefore shorter paths tend have heavier trails of pheromone as they are marched more frequently thus attracting more ants to this path. Since pheromone evaporates this provides an advantage of avoiding the convergence to a local minimum path. In other words, if pheromone did evaporate at all, the paths chosen by the first ants would still attract the following ants.
+	The Ant Colony Optimization (ACO) algorithms tries to mimic the natural phenomenon of ants finding a path from a food source to the colony. Ants start first going at random paths, leaving trails of a chemical substance called pheromone behind. Pheromone evaporates with time, therefore shorter paths tend to have heavier trails of pheromone as they are marched more frequently thus attracting more ants to this path. Since pheromone evaporates this provides an advantage of avoiding the convergence to a local minimum path. In other words, if pheromone did not evaporate at all, the paths chosen by the first ants would still attract the following ants.
 	
 	\begin{figure}[h!]
 		\centering
@@ -160,14 +160,14 @@
 	\begin{itemize}
 		\renewcommand{\labelitemi}{-}
 		\item $\textit{p}^\textit{k}_\textit{ij}$ is the probability that city \textit{j} will be selected after city \textit{i} by ant \textit{k}.
-		\item $\tau_{is}$ is the intensity of pheromone between cities \textit{i} and \textit{j}.
+		\item $\tau_{ij}$ is the intensity of pheromone between cities \textit{i} and \textit{j}.
 		\item $\alpha$ is the parameter to regulate the influence of trails of pheromone.
 		\item $\eta$ is the visibility of city \textit{j} from city \textit{i} which is always measured as $\dfrac{1}{\text{distance between cities \textit{i} and \textit{j}}}$.
 		\item $\beta$ is the parameter to regulate the influence of $\eta_{ij}$
 		\item allowed$_k$ is the set of unvisited cities.
 	\end{itemize}
 
-	At the beginning of the algorithm, \textit{N} ants are assigned initial starting points (cities) at random. As the iterations proceed, ants decide which cities to visit according to $\textit{p}_\textit{ij}$ described in Eq. (\ref{eq:ACOprobability}). After \textit{n} iterations, each ant completes a tour. Tours with shorter distances, have stronger pheromone trails. Therefore updating the trails follow \textit{Q}/\textit{L}$_\textit{k}$ where \textit{Q} is a constant value and \textit{L}$_\textit{k}$ is the path length. Also as we mentioned before the pheromone trails evaporate with time. Therefore we can update $\tau_{is}$ according to the following equations:
+	At the beginning of the algorithm, \textit{N} ants are assigned initial starting points (cities) at random. As the iterations proceed, ants decide which cities to visit according to $\textit{p}_\textit{ij}$ described in Eq. (\ref{eq:ACOprobability}). After \textit{n} iterations, each ant completes a tour. Tours with shorter distances, have stronger pheromone trails. Therefore updating the trails follow \textit{Q}/\textit{L}$_\textit{k}$ where \textit{Q} is a constant value and \textit{L}$_\textit{k}$ is the path length. Also as we mentioned before the pheromone trails evaporate with time. Therefore we can update $\tau_{ij}$ according to the following equations:
 	
 	\begin{equation} \label{eq:ACOTrailUpdate1}
 		\tau_{ij}(t+1) = \rho \textbf{.} \tau_{ij}(t) + \Delta\tau_{ij}
@@ -212,7 +212,7 @@
 	\end{itemize}
 	
 	\section{Results}
-	The codes to solve the TSP problem [links!!!] were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the first trial and a maximum time of 118.9 seconds on the 8$^th$ trial, the shortest path found was on the 6$^th$ iteration, of length 226,854.7 which is 65\% within the optimal solution. While the optimized GA algorithms produced much better running times for the same number of iterations with a minimum of 23.8 seconds on th first run and a maximum of 32.1 seconds on the 7$^th$ run, the final path length didn't differ much from the previous implementation, a path of length 200068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
+	The codes to solve the TSP problem\cite{Kirk14}\cite{mathwork}\cite{Jang02}\cite{Jevtic14}\cite{Ibrahim15} were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the first trial and a maximum time of 118.9 seconds on the 8$^{th}$ trial, the shortest path found was on the 6$^{th}$ iteration, of length 226,854.7 which is 65\% within the optimal solution. While the optimized GA algorithms produced much better running times for the same number of iterations with a minimum of 23.8 seconds on th first run and a maximum of 32.1 seconds on the 7$^{th}$ run, the final path length didn't differ much from the previous implementation, a path of length 200,068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
 	
 	\begin{figure}[h!]
 		\centering
@@ -222,9 +222,9 @@
 		\label{fig:GAalgorithm}
 	\end{figure}
 	
-	Simulated annealing approach tested on Octave produced a minimum running time of 1217 seconds at the 4$^th$ test and a maximum of 1526.3 seconds at the 10$^th$ test, while on Matlab a minimum of 62.8 seconds and a maximum of 107.5 seconds running times were produced on the first and last tests respectively. The shortest path solution produced to our dataset was of length 89237 which is within 11.34\% of the optimal solution.
+	Simulated annealing approach tested on Octave produced a minimum running time of 1217 seconds at the 4$^{th}$ test and a maximum of 1526.3 seconds at the 10$^{th}$ test, while on Matlab a minimum of 62.8 seconds and a maximum of 107.5 seconds running times were produced on the first and last tests respectively. The shortest path solution produced to our dataset was of length 89,237 which is within 11.34\% of the optimal solution.
 	
-	The nearest neighbor tests conducted on Octave provided running times ranging between 132 seconds and 136 seconds, which are approximately 7 to 10 times less than all other conducted tests of different algorithms. On Matlab, the tests took 10.8 seconds for the quickest run and 15.4 seconds for the longest run on the 1$^st$ and 5$^th$ runs respectively. The nearest neighbor implementation conducted did not take a random starting point and therefore all runs provided the same path length of 96,514.8 which is approximately 18\%  within the optimal solution. Results of NN run is shown in fig.\ref{fig:NNalgorithm}
+	The nearest neighbor tests conducted on Octave provided running times ranging between 132 seconds and 136 seconds, which are approximately 7 to 10 times less than all other conducted tests of different algorithms. On Matlab, the tests took 10.8 seconds for the quickest run and 15.4 seconds for the longest run on the 1$^{st}$ and 5$^{th}$ runs respectively. The nearest neighbor implementation conducted did not take a random starting point and therefore all runs provided the same path length of 96,514.8 which is approximately 18\%  within the optimal solution. Results of NN run is shown in fig.\ref{fig:NNalgorithm}
 	
 	\begin{figure}[h!]
 		\centering
@@ -233,9 +233,9 @@
 		\label{fig:NNalgorithm}
 	\end{figure}
 	
-	The ant colony tests resulted in running times between 777.8 seconds and 790 seconds on Octave and between 11.7 seconds and 16.8 seconds on Matlab. The algorithm default parameters used runs the algorithm for 10 iterations and the shortest path length found was of length 951387 and that is 91.5\% within the optimal solution. A run for 100 iterations was conducted. This took 130 seconds to complete and provided a path of length 880279, 91\% within the optimal solution and 0.5\% better than the previous run.
+	The ant colony tests resulted in running times between 777.8 seconds and 790 seconds on Octave and between 11.7 seconds and 16.8 seconds on Matlab. The algorithm default parameters used runs the algorithm for 10 iterations and the shortest path length found was of length 951387 and that is 91.5\% within the optimal solution. A run for 100 iterations was conducted. This took 130 seconds to complete and provided a path of length 880,279, 91\% within the optimal solution and 0.5\% better than the previous run.
 	
-	The previous results are tabulated in Table \ref{tab:results}
+	The previous results are tabulated in Table \ref{tab:results}.
 	
 
 	\begin{table}[h!]
@@ -254,7 +254,7 @@
 			running time & & & & & \\
 			
 			\hline
-			{\multirow{2}{*}{Generated}} & {226854} &{89237}& {96514} &{951387} &{200068} \\
+			{\multirow{2}{*}{Generated}} & {226,854} &{89,237}& {96,514} &{951,387} &{200,068} \\
 			path length & & & & & \\
 			
 			\hline
@@ -268,11 +268,11 @@
 
 	
 	\section{Conclusion}
-	In this study, we have provided a comparative analysis between the four algorithms -GA, SA, NN, and ACO- for solving the TSP using free {Matlab\texttrademark} implementations. The analysis was focused on measuring the runtime performance and how close is the solution from the known optimal solution of the the Uruguay dataset of 734 unique points. Furthermore, the experiments were run on both {Matlab\texttrademark} and {Octave\texttrademark} software to highlight the differences between the two in terms of performance.
+	In this study, we have provided a comparative analysis between the four algorithms -GA, SA, NN, and ACO- for solving the TSP using free {Matlab\texttrademark} implementations. The analysis was focused on measuring the runtime performance and how close is the solution from the known optimal solution of the the Uruguay dataset of 734 unique points. Furthermore, the experiments were run on both {Matlab\texttrademark} and Octave software to highlight the differences between the two in terms of performance.
 	
-	Within the considered algorithms, SA managed to produce the most optimal solution at a $11.34\%$ of the optimal solution, however, it was one of the slowest implementations. The NN algorthim, although a simple algorithm, it produced the second most optimal solution only at $18\%$ from the global optimum and interestingly with the fastest runtime between all the other algorithms. On the contrary, ACO proved to be the least correct algorithm with $91.5\%$ from the global optimum.
+	Within the considered algorithms, SA managed to produce the most optimal solution at a $11.34\%$ of the optimal solution, however, it was one of the slowest implementations. The NN algorthim, although a simple algorithm, produced the second most optimal solution only at $18\%$ from the global optimum and interestingly with the fastest runtime between all the other algorithms. On the contrary, ACO proved to be the least correct algorithm with $91.5\%$ from the global optimum. Another important finding, is that for the GA, the newer optimized implementation have managed to improve the runtime performance considerably.
 	
-	Additionally, the difference between the runtime performance of the four algorithms when run on both {Matlab\texttrademark} and {Octave\texttrademark} was found to be very huge; for example in the case of GA, {Matlab\texttrademark} was 380x faster. This can draw a conclusion that the current state of {Matlab\texttrademark} software far exceeds it's free open source alternative {Octave\texttrademark}.
+	Additionally, the difference between the runtime performance of the four algorithms when run on both {Matlab\texttrademark} and Octave was found to be very huge; for example in the case of GA, {Matlab\texttrademark} was 380x faster. This can draw a conclusion that the current state of {Matlab\texttrademark} software far exceeds it's free open source alternative Octave.
 	\begin{thebibliography}{999}
 		\bibitem{applegate07}
 		Applegate, D. L., Bixby, R. E., Chvatal, V.,  and Cook, W. J., (2007).
@@ -300,7 +300,7 @@
 		pp. 142-149
 		\bibitem{Wang17}
 		Wang, X., Pengcheng, Li, Wang Lin, Wang Lei, (2017).
-		\emph{A Nobel Genetic Algorithm Based on Circles for Larger-Scale Traveling Salesman Problem}. 2017 International Conference on Robotics and Automation Sciences (ICRAS).
+		\emph{A Novel Genetic Algorithm Based on Circles for Larger-Scale Traveling Salesman Problem}. 2017 International Conference on Robotics and Automation Sciences (ICRAS).
 		\bibitem{Perez14}
 		Perez, D., Powley, E., Whitehouse, D., Rohlfshagen, P., Samothrakis, S., Cowling, P. Lucas, S. (2014).
 		\emph{Solving the Physical Traveling Salesman Problem Using Tree Search and Macro Actions}. IEEE Transaction on Computational Intelligence and AI in Games, Vol 6. No. 1, March 2014,
