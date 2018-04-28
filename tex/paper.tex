@@ -35,34 +35,37 @@
 	In this section, the four algorithms are considered with a brief description of how they solve TSP.
 	\subsection{Genetic Algorithm}
 	
-	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection in order to solve combinatorial optimization problems. Operations like mutation, crossover and selection are used to search for the optimal solution for a given problem\cite{Wang17}.
+	Genetic algorithm (GA) is a randomized metaheuristic search technique that simulates the process of evolution and natural selection\cite{Wang17}.GA formulates TSP using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each solution is called an individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA -cities- mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
 	
-	Genetic algorithm formulates a problem using the same terminology that is used in the biological process of evolution. A population of candidate solutions -each solution is called an individual- is evolved toward an optimal solution. In the evolutionary iterative process, each individual is assessed to measure its fitness score using an objective function. The individuals with higher score are selected to have their genes or DNA mutated and changed which will result in a new population of possible solutions. The process goes on until an individual with a satisfactory fitness score is reached or the maximum number of generations has been produced.
-	
-	TSP can be easily formulated in GA context. The search space is the set of routes that spans all the cities of Uruguay, and the goal is to find a route with the minimum cost. Each route is considered as an individual with a DNA that resembles the ordered set of towns and cities in the route -genes. The mutation and crossover of individuals is the process of reordering genes in an individual's DNA to produce new individuals. The solution for TSP will be an individual with DNA representing the optimal route between towns and cities that have the minimal distance cost.
-	
-	The iterative process for solving TSP using GA is given by the following steps:
+	The iterative process for solving TSP using GA\cite{Kirk14} is given by the following steps:
 	\begin{enumerate}
-		\item Create an initial population of size {\bfseries N}.
-		\item Evaluate the fitness of each individual in the population.
-		\item Select {\bfseries M} individuals from the current population using their fitness score as a criterion.
-		\item Mutate selected individuals and create 3 new routes.
+		\item Create an initial population of size 100.
+		\item Evaluate the fitness of each individual in the population using the tour distance as score.
+		\item Find best route in the current population and record it if exceed the best know so far.
+		\item For every 4 consecutive individuals in the population perform mutation as follows:
+		\subitem{First:}
+		Not changed.
+		\subitem{Second:}
+		A random gene sequence is flipped.
+		\subitem{Third:}
+		Random genes are swapped with each others.
+		\subitem{Fourth:}
+		A random gene sequence is slided from its current position.
 		\item Repeat steps 3 and 4 until all the individuals are mutated.
 		\item Replace the old population with the new mutated one.
-		\item Go back to step 2 if more generations can be mutated or the number of iterations did not reach an upper bound of iterations. Otherwise, the final result is the best population created and the most fit individual is considered TSP solution.  
+		\item Go back to step 2 until the number of iterations reaches 1e4. 
 	\end{enumerate}
-	It is important to note that the resultant solution is not necessarily the optimal one. Specially, when a limited number of GA iterations is used to reduce the relatively large calculation time to be able to converge to the optimal solution.
+	
+	After running all the GA iterations, the best individual that the algorithm has seen in the evolutionary search process is kept and is chosen as the most optimal solution.
 	
 	\subsection{Simulated Annealing}
-	Simulated annealing (SA) is another algorithm that mimic a natural phenomena; this time it is the heat treatment process used on metals. During the annealing process, a metal is heated enough to allow its molecular structure to be altered. The temperature {\bfseries T} is steadily lowered by a cooling constant {$\boldsymbol \beta$}, which subsequently lowers the energy of the atoms and restricts their arrangement until the metal's structure finally becomes set. That in turn, minimizes the number of defects in the structure of the metal.
+	Simulated annealing (SA) is another algorithm that mimic a natural phenomena; this time it is the heat treatment process used on metals. SA can be considered as a modification for greedy search as an attempt to reach an optimal solution rather than getting stuck at a local optimum\cite{Kerrache14}.
 	 
-	SA can be considered as a modification for greedy search as an attempt to reach an optimal solution rather than getting stuck at a local optimum. For example, consider a problem of searching a function with the goal of reaching the global optimum. A greedy approach would move in the direction that result in a higher gain and stops once no more moves would lead to a higher gain, thus, a greedy approach can miss the global optimal solution.
+	SA, occasionally, allows for moves in directions with lower gain that would not have been accessible otherwise. SA starts at random solution -a state {\bfseries S}- and then at each iteration step, the solution is slightly modified in order to choose another search point and move to a new state $\boldsymbol{S\prime}$. This modification is made with a random reorder of a constant number of elements in the solution space {\bfseries M}. The selection process of the new state -solution- considers the change in cost {\bfseries C} - know as {$\boldsymbol \gamma$}- that will be incurred if the new state is chosen. When the cost is going to be lower, the new state is chosen. Else, however, the incurred cost might increase, there is still a chance to accept this state with a probability \\{\bfseries P({$\boldsymbol \gamma$}, T)} that is relative to the current temperature of the simulation; that is, when the current temperature is high, the probability to take worse solutions will be higher as there still more simulation time available to try different search point in order to reach the global optimum.
 	 
-	In contrast to greedy approach, SA occasionally allows moves in directions with lower gain that would not have been accessible otherwise. SA starts at random solution -a state {\bfseries S}- and then at each iteration step, the solution is slightly modified in order to choose another search point and move to a new state $\boldsymbol{S\prime}$. This modification is made with a random reorder of a constant number of elements in the solution space {\bfseries M}. The selection process of the new state -solution- considers the change in cost {\bfseries C} - know as {$\boldsymbol \gamma$}- that will be incurred if the new state is chosen. When the cost is going to be lower, the new state is chosen. Else, however, the incurred cost might increase, there is still a chance to accept this state with a probability \\{\bfseries P({$\boldsymbol \gamma$}, T)} that is relative to the current temperature of the simulation; that is, when the current temperature is high, the probability to take worse solutions will be higher as there still more simulation time available to try different search point in order to reach the global optimum.
-	 
-	In the context of TSP, each state in SA algorithm is a route between the towns and cities. The cost measured for each route is the distance  between its points and accordingly the optimal solution is that with the minimum distance. SA algorithm would then work in the following steps:
+	The implementation\cite{Jang02} used for SA performs the following steps:
 	\begin{enumerate}
-		\item Choose random state {\bfseries S} and the starting temperature {\bfseries T} and cooling constant {$\boldsymbol \beta$}.
+		\item Choose random state {\bfseries S}. Set the starting temperature {\bfseries T} =  $16e5 $ and cooling constant {$\boldsymbol \beta$} = 0.5.
 		\item Create new state $\boldsymbol{S\prime}$ by randomly swapping {\bfseries M} cities in the current state.
 		\item Compute the change in cost using Eq.(\ref{eq:GADelta})
 		\begin{equation} \label{eq:GADelta}
@@ -204,7 +207,7 @@
 	
 	Another two similar datasets from the national dataset collection were used to verify the results. The two datasets are Oman and Western Sahara. These datasets vary gravely in the number of points as Oman has 1,979 points with an optimal tour of 86,891 while Western Sahara has only 29 points with an optimal tour of 27,603. 
 	
-	The codes to solve the TSP\cite{Kirk14}\cite{mathwork}\cite{Jang02}\cite{Jevtic14}\cite{Ibrahim15} were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. The generated path efficiency is calculated as the percentage of the increase in the resulting path length over the optimal path.
+	The codes to solve the TSP\cite{Kirk14}\cite{mathwork}\cite{Jang02}\cite{Jevtic14}\cite{Ibrahim15} were executed on both Matlab and Octave V4.0 using Intel i7-2630QM with 4 cores and 6Gb of RAM aand running on Ubuntu 16.04 Linux-kernel 4.4.0-119-generic, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. The generated path efficiency is calculated as the percentage of the increase in the resulting path length over the optimal path.
 	$\frac{\textit{Detected Path Length} - \textit{Optimal Path Length}}{Detected Path Length} * 100 $
 	
 	In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the 1$^{st}$ trial and a maximum time of 118.9 seconds on the 8$^{th}$ trial, the shortest path found was on the 6$^{th}$ iteration, of length 226,854.7 which is 65\% within the optimal solution. Another implementation of GA, Optimized GA, that is mentioned in \cite{mathwork} was tested. This is a toolbox provided by MathWorks for optimization problems, where a search for a global maximum or minimum is required.  While the optimized GA algorithm produced much better running times for the same number of iterations with a minimum of 23.8 seconds on the 1$^{st}$ run and a maximum of 32.1 seconds on the 7$^{th}$ run, the final path length didn't differ much from the previous implementation, a path of length 200,068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
