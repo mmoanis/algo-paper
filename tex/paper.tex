@@ -95,7 +95,7 @@
 	\subsection{Nearest Neighbor (NN)}
 	Nearest neighbor approach is one of the simplest algorithms in combinatorial optimization problems and also one of the fastest running algorithms\cite{GreedyNN}.
 	
-	The algorithm implementation for solving the TSP problem is as follows:
+	The algorithm implementation for solving the TSP is as follows:
 	\begin{enumerate}
 		\item Select a random city as the current city
 		\item For all cities
@@ -198,7 +198,7 @@
 	A colony of 10 ants was used for our conducted experiments along with evaporation coefficient of 0.15, $\alpha$=1 and $\beta$=4 for 10 iterations total. 
 	\section{Results}
 	
-	Datasets for TSP problem contain a wide variety of formats. Cities across a country, VLSI nodes or traveling across the Mona Lisa drawing are examples of these formats. But they are all similar in the data structure which is a 2-D coordinate point system with euclidean distances as the distance between nodes.
+	Datasets for TSP contain a wide variety of formats. Cities across a country, VLSI nodes or traveling across the Mona Lisa drawing are examples of these formats. But they are all similar in the data structure which is a 2-D coordinate point system with euclidean distances as the distance between nodes.
 	For our work we selected the Uruguay dataset from the national dataset collection\cite{UY734} to be used to assess the four algorithms in this survey in terms of runtime performance and how close are their solutions compared to the dataset known optimal solution. Uruguay dataset is characterized by: 
 	\begin{itemize}
 		\item 734 unique points (no duplicates)
@@ -214,7 +214,7 @@
 	
 	Another two similar datasets from the national dataset collection were used to verify the results. The two datasets are Oman and Western Sahara. These datasets vary gravely in the number of points as Oman has 1,979 points with an optimal tour of 86,891 while Western Sahara has only 29 points with an optimal tour of 27,603. 
 	
-	The codes to solve the TSP problem\cite{Kirk14}\cite{mathwork}\cite{Jang02}\cite{Jevtic14}\cite{Ibrahim15} were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. The generated path efficiency is calculated as the percentage of the increase in the resulting path length over the optimal path.
+	The codes to solve the TSP\cite{Kirk14}\cite{mathwork}\cite{Jang02}\cite{Jevtic14}\cite{Ibrahim15} were executed on both Matlab and Octave, taking into consideration the resulting output path length and the execution time. All the test conducted were repeated ten times each in order to see how well the algorithms can improve in both criteria. The generated path efficiency is calculated as the percentage of the increase in the resulting path length over the optimal path.
 	$\frac{\textit{Detected Path Length} - \textit{Optimal Path Length}}{Detected Path Length} * 100 $
 	
 	In the program using GA, the running time on Octave was 45,362 seconds (approximately 12.5 hours). Due to the long duration of the test runtime this experiment was not repeated except two times. While the running time on Matlab provided a minimum time of 76 seconds on the 1$^{st}$ trial and a maximum time of 118.9 seconds on the 8$^{th}$ trial, the shortest path found was on the 6$^{th}$ iteration, of length 226,854.7 which is 65\% within the optimal solution. Another implementation of GA, Optimized GA, that is mentioned in \cite{mathwork} was tested. This is a toolbox provided by MathWorks for optimization problems, where a search for a global maximum or minimum is required.  While the optimized GA algorithm produced much better running times for the same number of iterations with a minimum of 23.8 seconds on the 1$^{st}$ run and a maximum of 32.1 seconds on the 7$^{th}$ run, the final path length didn't differ much from the previous implementation, a path of length 200,068 was found which is 60\% within the optimal solution. At a much faster running time and a slight improvement of 5\%, the seconds GA algorithm can be run for longer iterations and thus providing much better results. Results of GA run is shown in fig.\ref{fig:GAalgorithm}
@@ -434,7 +434,7 @@
 		\bibitem{ACOExample}
 		M. Dorigo, V. Maniezzo, A. Colorni, \emph{Ant system: optimization by a colony of cooperating agents}.(1996).
 		\bibitem{ACO}
-		Jinhui Y., Xiaohu S., Maurizio M., Yanchun L.,\emph{An ant colony optimization method for generalized TSP problem}. (2008).
+		Jinhui Y., Xiaohu S., Maurizio M., Yanchun L.,\emph{An ant colony optimization method for generalized TSP}. (2008).
 	\end{thebibliography}
 \end{document}
 
